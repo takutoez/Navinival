@@ -111,21 +111,24 @@
                         <sections>
                             <tableViewSection headerTitle="ユーザー情報" id="Enc-jB-sUP">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="HKM-RL-NlY" style="IBUITableViewCellStyleDefault" id="uBb-kP-pNl">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="uBb-kP-pNl">
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uBb-kP-pNl" id="Vmv-ls-Wto">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="right" tableViewCell="uBb-kP-pNl" id="Vmv-ls-Wto">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="学院生" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HKM-RL-NlY">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="学院生" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYR-C4-l2w">
+                                                    <rect key="frame" x="15" y="11" width="520" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XHe-m8-b0I">
-                                                    <rect key="frame" x="274" y="6" width="51" height="31"/>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Owq-1V-X7E">
+                                                    <rect key="frame" x="543" y="6" width="51" height="31"/>
                                                 </switch>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Owq-1V-X7E" firstAttribute="trailing" secondItem="Vmv-ls-Wto" secondAttribute="trailingMargin" id="cq4-HK-N1Z"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -170,31 +173,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="pRU-lp-fHh" kind="relationship" relationship="rootViewController" id="zCK-sI-RV5"/>
+                        <segue destination="irn-vk-PUh" kind="relationship" relationship="rootViewController" id="8qJ-6X-giz"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="715-AW-zbe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="261" y="183"/>
-        </scene>
-        <!--情報-->
-        <scene sceneID="QPG-zC-5b3">
-            <objects>
-                <viewController id="pRU-lp-fHh" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="j88-lF-sqi"/>
-                        <viewControllerLayoutGuide type="bottom" id="lBc-ab-fYw"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="m4o-bf-fyc">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="情報" id="W5A-nt-INF"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6ku-ax-Gax" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1046" y="183"/>
         </scene>
         <!--予定-->
         <scene sceneID="hJ8-La-l53">
@@ -645,6 +629,36 @@
             </objects>
             <point key="canvasLocation" x="1748" y="-373"/>
         </scene>
+        <!--情報-->
+        <scene sceneID="4Gx-CT-N2f">
+            <objects>
+                <tableViewController id="irn-vk-PUh" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="jTe-nk-6Ue">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="kDz-tu-6GY">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kDz-tu-6GY" id="r9S-b9-Uht">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="J8A-4a-XT9" kind="show" trigger="accessoryAction" id="KPU-uG-Rpg"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="irn-vk-PUh" id="beB-z4-YTq"/>
+                            <outlet property="delegate" destination="irn-vk-PUh" id="PD3-nF-bdF"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="情報" id="Qx1-OP-4bU"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XAj-9c-eyd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1046" y="183"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="YLO-H0-xT8">
             <objects>
@@ -791,6 +805,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A6o-79-eqo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1553" y="-142"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="R20-gB-Aah">
+            <objects>
+                <viewController id="J8A-4a-XT9" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1IC-X4-ddj"/>
+                        <viewControllerLayoutGuide type="bottom" id="KpI-hh-n2k"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ila-p6-Qph">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wNI-VY-fpP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1823" y="183"/>
         </scene>
         <!--Second Day Table View Controller-->
         <scene sceneID="yLW-p1-VUM">
@@ -1299,7 +1331,7 @@
         <image name="settings_icon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1oh-5O-zWj"/>
         <segue reference="qAV-mn-usX"/>
+        <segue reference="ho6-zU-VSd"/>
     </inferredMetricsTieBreakers>
 </document>
