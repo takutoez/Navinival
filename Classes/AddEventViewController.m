@@ -9,7 +9,7 @@
 #import "AddEventViewController.h"
 #import "FirstDayTableViewController.h"
 #import "SecondDayTableViewController.h"
-#import "ThirdViewController.h"
+#import "PlanViewController.h"
 
 @interface AddEventViewController (){
     

@@ -11,7 +11,6 @@
 @interface MyAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
+@property (strong, nonatomic) NSString *baseUrl;
 
 @end
-
