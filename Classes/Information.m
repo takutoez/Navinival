@@ -9,18 +9,14 @@
 #import "Information.h"
 
 @implementation Information
-@synthesize title, tags, time, x, y, content, image;
 
-+(id)title:(NSString *)title tags:(NSString *)tags time:(NSString *)time x:(NSString *)x y:(NSString *)y content:(NSString *)content image:(NSString *)image
++(id)title:(NSString *)_title time:(NSString *)_time content:(NSString *)_content image:(NSString *)_image
 {
     Information *info = [[self alloc] init];
-    [info setTitle:title];
-    [info setTags:tags];
-    [info setTime:time];
-    [info setX:x];
-    [info setY:y];
-    [info setContent:content];
-    [info setImage:image];
+    [info setTitle:_title];
+    [info setTime:_time];
+    [info setContent:_content];
+    [info setImage:_image];
     return info;
 }
 

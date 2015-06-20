@@ -43,7 +43,7 @@
     
     Information *info = [_array objectAtIndex:indexPath.row];
     [[cell textLabel] setText:[info title]];
-    [[cell detailTextLabel] setText:[NSString stringWithFormat:@"%@ %@", [info tags], [info time]]];
+    [[cell detailTextLabel] setText:[NSString stringWithFormat:@"%@", [info time]]];
     
     return cell;
 }
@@ -62,7 +62,7 @@
                                 _array = [NSMutableArray array];
                                 for (NSDictionary *jsonDictionary in jsonArray)
                                 {
-                                    [_array addObject:[Information title:[jsonDictionary objectForKey:@"title"] tags:[jsonDictionary objectForKey:@"tags"] time:[jsonDictionary objectForKey:@"time"] x:[jsonDictionary objectForKey:@"x"] y:[jsonDictionary objectForKey:@"y"] content:[jsonDictionary objectForKey:@"content"] image:[NSString stringWithFormat:@"%@%@", BASE_URL, [jsonDictionary objectForKey:@"image"]]]];
+                                    [_array addObject:[Information title:[jsonDictionary objectForKey:@"title"] time:[jsonDictionary objectForKey:@"time"] content:[jsonDictionary objectForKey:@"content"] image:[NSString stringWithFormat:@"%@%@", BASE_URL, [jsonDictionary objectForKey:@"image"]]]];
                                 }
                                 [[self tableView] reloadData];
                                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{

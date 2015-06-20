@@ -107,7 +107,7 @@ int placeTapCounter;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"doneAddEventUnwind"] && !remove){
-        Information *info = [Information title:self.TitleField.text tags:@"" time:self.Time.text x:[NSString stringWithFormat:@"%f", pinX] y:[NSString stringWithFormat:@"%f", pinY] content:self.MemoTextView.text image:@""];
+        Information *info = [Information title:self.TitleField.text time:self.Time.text content:self.MemoTextView.text image:@""];
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         NSArray *array = [userDefaults arrayForKey:@"EVENTS"];
         NSMutableArray *mutableArray = [NSMutableArray arrayWithArray:array];
@@ -118,11 +118,8 @@ int placeTapCounter;
         }
     
         [dictionary setObject:info.title forKey:@"TITLE"];
-        [dictionary setObject:info.tags forKey:@"TAGS"];
         [dictionary setObject:info.time forKey:@"TIME"];
         [dictionary setObject:[self.dateFormatter stringFromDate:[self.Picker.date dateByAddingTimeInterval:-300]] forKey:@"SET_TIME"];
-        [dictionary setObject:info.x forKey:@"X"];
-        [dictionary setObject:info.y forKey:@"Y"];
         [dictionary setObject:info.content forKey:@"CONTENT"];
         [mutableArray addObject:dictionary];
         [userDefaults setObject:mutableArray forKey:@"EVENTS"];
