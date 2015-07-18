@@ -1,10 +1,11 @@
 #include "AppDelegate.h"
-#include "HelloWorldScene.h"
 
 USING_NS_CC;
 
+HelloWorld *helloWorld;
+
 AppDelegate::AppDelegate() {
-    //1,2?
+    
 }
 
 AppDelegate::~AppDelegate()
@@ -17,14 +18,14 @@ void AppDelegate::initGLContextAttrs()
 {
     //set OpenGL context attributions,now can only set six attributions:
     //red,green,blue,alpha,depth,stencil
-    GLContextAttrs glContextAttrs = {8, 8, 8, 8, 24, 8};//3
+    GLContextAttrs glContextAttrs = {8, 8, 8, 8, 24, 8};
 
     GLView::setGLContextAttrs(glContextAttrs);
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
     // initialize director
-    auto director = Director::getInstance();//5
+    auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
         glview = GLViewImpl::create("My Game");
@@ -38,12 +39,16 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     // create a scene. it's an autorelease object
-    auto scene = HelloWorld::createScene();
+    auto scene = helloWorld->createScene();
 
     // run
     director->runWithScene(scene);
 
     return true;
+}
+
+void AppDelegate::onSegmentedControlChanged(int story){
+    helloWorld->getInstance()->onSegmentedControlChanged(story);
 }
 
 // This function will be called when the app is inactive. When comes a phone call,it's be invoked too

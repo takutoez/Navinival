@@ -8,6 +8,8 @@
 
 #import "MyAppDelegate.h"
 #import <Parse/Parse.h>
+#import "RootViewController.h"
+#import "Information.h"
 
 @interface MyAppDelegate ()
 
@@ -92,22 +94,15 @@
 
 - (void)mapInformation:(CGPoint)point number:(NSInteger)number upperLeftX:(double)upperLeftX upperLeftY:(double)upperLeftY lowerLeftX:(double)lowerLeftX lowerLeftY:(double)lowerLeftY upperRightX:(double)upperRightX upperRightY:(double)upperRightY lowerRightX:(double)lowerRightX lowerRightY:(double)lowerRightY{
     
-    CGVector upper      = CGVectorMake(upperRightX - upperLeftX, upperRightY - upperLeftY);
-    CGVector left       = CGVectorMake(upperLeftX - lowerLeftX, upperLeftX - lowerLeftY);
-    CGVector lower      = CGVectorMake(lowerLeftX - lowerRightY, lowerLeftY - lowerRightY);
-    CGVector right      = CGVectorMake(lowerRightX - upperRightX, lowerRightY - upperRightY);
-    CGVector upperLeft  = CGVectorMake(point.x - upperLeftX, point.y - upperLeftY);
-    CGVector lowerLeft  = CGVectorMake(point.x - lowerLeftX, point.y - lowerLeftY);
-    CGVector upperRight = CGVectorMake(point.x - upperRightX, point.y - upperRightY);
-    CGVector lowerRight = CGVectorMake(point.x - lowerRightX, point.y - lowerRightY);
-    
-    double c1 = upper.dx * upperRight.dy - upper.dy * upperRight.dx;
-    double c2 = left.dx * upperLeft.dy - left.dy * upperLeft.dx;
-    double c3 = lower.dx * lowerLeft.dy - lower.dy * lowerLeft.dx;
-    double c4 = right.dx * lowerRight.dy - right.dy * lowerRight.dx;
-    
-    if((c1 > 0 && c2 > 0 && c3 > 0 && c4 > 0) || (c1 < 0 && c2 < 0 && c3 < 0 && c4 < 0)){
-        NSLog(@"OK");
+    if((lowerLeftX - upperLeftX) * (point.y - upperLeftY) - (lowerLeftY - upperLeftY) * (point.x - upperLeftX) < 0 && (lowerRightX - lowerLeftX) * (point.y - lowerLeftY) - (lowerRightY - lowerLeftY) * (point.x - lowerLeftX) < 0 && (upperRightX - lowerRightX) * (point.y - lowerRightY) - (upperRightY - lowerRightY) * (point.x - lowerRightX) < 0 && (upperLeftX - upperRightX) * (point.y - upperRightY) - (upperLeftY - upperRightY) * (point.x - upperRightX) < 0){
+            [_mapArray enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
+                NSLog(@"%d: %@", idx, obj);
+            
+                if ([[obj objectForKey:@"number"] intValue] == number) {
+                    [(RootViewController *)[[((UITabBarController *)self.window.rootViewController) viewControllers] objectAtIndex:0].childViewControllers[0] showMapInformation:[Information title:[obj objectForKey:@"title"] time:[obj objectForKey:@"time"] content:[obj objectForKey:@"content"] image:[obj objectForKey:@"image"]]];
+                    *stop = YES;
+                }
+            }];
     }
     
 }
@@ -116,7 +111,7 @@
     NSLog(@"%d, %d", x, y);
     CGPoint point = CGPointMake(x, y);
     switch(floor){
-        case 1:
+        case 0:
             [self mapInformation: point number:1 upperLeftX:2464.0 upperLeftY:4197.0 lowerLeftX:2464.0 lowerLeftY:4274.0 upperRightX:2570.0 upperRightY:4197.0 lowerRightX:2570.0 lowerRightY:4274.0];//文書保管庫
             [self mapInformation: point number:2 upperLeftX:2463.0 upperLeftY:4115.0 lowerLeftX:2464.0 lowerLeftY:4196.0 upperRightX:2569.0 upperRightY:4115.0 lowerRightX:2570.0 lowerRightY:4196.0];//作業室
             [self mapInformation: point number:3 upperLeftX:2464.0 upperLeftY:4054.0 lowerLeftX:2463.0 lowerLeftY:4114.0 upperRightX:2569.0 upperRightY:4053.0 lowerRightX:2569.0 lowerRightY:4115.0];//更衣室
@@ -186,7 +181,7 @@
             [self mapInformation: point  number:160 upperLeftX:1725.0 upperLeftY:2050.0 lowerLeftX:1725.0 lowerLeftY:2436.0 upperRightX:2123.0 upperRightY:2050.0 lowerRightX:2123.0 lowerRightY:2435.0];//第二体育館
             [self mapInformation: point  number:161 upperLeftX:2123.0 upperLeftY:2195.0 lowerLeftX:2123.0 lowerLeftY:2373.0 upperRightX:2172.0 upperRightY:2195.0 lowerRightX:2172.0 lowerRightY:2373.0];//第二体育館玄関
             break;
-        case 2:
+        case 1:
             [self mapInformation: point number:19 upperLeftX:2464.0 upperLeftY:4148.0 lowerLeftX:2464.0 lowerLeftY:4278.0 upperRightX:2569.0 upperRightY:4147.0 lowerRightX:2569.0 lowerRightY:4279.0];//1-4
             [self mapInformation: point number:20 upperLeftX:2464.0 upperLeftY:4026.0 lowerLeftX:2464.0 lowerLeftY:4146.0 upperRightX:2569.0 upperRightY:4026.0 lowerRightX:2569.0 lowerRightY:4147.0];//1-3
             [self mapInformation: point number:21 upperLeftX:2464.0 upperLeftY:3905.0 lowerLeftX:2463.0 lowerLeftY:4025.0 upperRightX:2568.0 upperRightY:3906.0 lowerRightX:2569.0 lowerRightY:4026.0];//1-2
@@ -247,7 +242,7 @@
             [self mapInformation: point number:133 upperLeftX:3149.0 upperLeftY:2338.0 lowerLeftX:3149.0 lowerLeftY:2487.0 upperRightX:3267.0 upperRightY:2338.0 lowerRightX:3269.0 lowerRightY:2487.0];//音楽室2
             [self mapInformation: point number:134 upperLeftX:2456.0 upperLeftY:2056.0 lowerLeftX:2456.0 lowerLeftY:2447.0 upperRightX:3150.0 upperRightY:2055.0 lowerRightX:3150.0 lowerRightY:2446.0];//講堂
             break;
-        case 3:
+        case 2:
             [self mapInformation: point number:36 upperLeftX:2461.0 upperLeftY:3782.0 lowerLeftX:2461.0 lowerLeftY:3901.0 upperRightX:2566.0 upperRightY:3782.0 lowerRightX:2566.0 lowerRightY:3902.0];//3-1
             [self mapInformation: point number:37 upperLeftX:2461.0 upperLeftY:3902.0 lowerLeftX:2460.0 lowerLeftY:4023.0 upperRightX:2566.0 upperRightY:3902.0 lowerRightX:2567.0 lowerRightY:4023.0];//3-2
             [self mapInformation: point number:38 upperLeftX:2462.0 upperLeftY:4022.0 lowerLeftX:2461.0 lowerLeftY:4144.0 upperRightX:2566.0 upperRightY:4024.0 lowerRightX:2567.0 lowerRightY:4146.0];//3-3

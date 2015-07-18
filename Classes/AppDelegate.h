@@ -2,6 +2,7 @@
 #define  _APP_DELEGATE_H_
 
 #include "cocos2d.h"
+#include "HelloWorldScene.h"
 
 /**
 @brief    The cocos2d Application.
@@ -15,6 +16,8 @@ public:
     virtual ~AppDelegate();
 
     virtual void initGLContextAttrs();
+    
+    void onSegmentedControlChanged(int story);
 
     /**
     @brief    Implement Director and Scene init code here.

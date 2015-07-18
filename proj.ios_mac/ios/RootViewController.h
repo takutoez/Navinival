@@ -24,10 +24,18 @@
  ****************************************************************************/
 
 #import <UIKit/UIKit.h>
+#include "HelloWorldScene.h"
+#import "MapInformationViewController.h"
+#import "Information.h"
 
 
 @interface RootViewController : UIViewController {
     UIWindow *window;
+    UISegmentedControl *segmentedControl;
 }
+
+@property (strong, nonatomic) UIView *mapInformationView;
+@property (strong, nonatomic) UIButton *hideButton;
+- (void)showMapInformation:(Information *)info;
 
 @end

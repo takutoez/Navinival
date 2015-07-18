@@ -27,7 +27,8 @@
 #import "RootViewController.h"
 #import "cocos2d.h"
 #import "platform/ios/CCEAGLView-ios.h"
-#include "HelloWorldScene.h"
+#import "HelloWorldScene.h"
+#import "NavigationBarWithSegmentedControl.h"
 
 @implementation RootViewController
 
@@ -50,7 +51,7 @@ static AppDelegate s_sharedApplication;
     // Override point for customization after application launch.
     
     // Add the view controller's view to the window and display.
-    window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];//4
+    window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
     
     // Init the CCEAGLView
     CCEAGLView *eaglView = [CCEAGLView viewWithFrame: [window bounds]
@@ -62,7 +63,7 @@ static AppDelegate s_sharedApplication;
                                      numberOfSamples: 0 ];
     self.view = eaglView;
     
-    [[UIApplication sharedApplication] setStatusBarHidden:false];
+    [self.navigationController setValue:[[[NavigationBarWithSegmentedControl alloc]init] autorelease] forKeyPath:@"navigationBar"];
     
     // IMPORTANT: Setting the GLView should be done after creating the RootViewController
     cocos2d::GLView *glview = cocos2d::GLViewImpl::createWithEAGLView(eaglView);
@@ -71,10 +72,58 @@ static AppDelegate s_sharedApplication;
     app->run();
 }
 
-
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSArray *itemArray = [NSArray arrayWithObjects: @"1階", @"2階", @"3階", nil];
+    segmentedControl = [[UISegmentedControl alloc] initWithItems:itemArray];
+    segmentedControl.frame = CGRectMake(20, self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height - 34, self.view.frame.size.width - 40, 30);
+    [segmentedControl addTarget:self action:@selector(onSegmentedControlChanged:) forControlEvents: UIControlEventValueChanged];
+    segmentedControl.selectedSegmentIndex = 0;
+    
+    UIViewController *mapInformationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"mapInformation"];
+    _mapInformationView = mapInformationViewController.view;
+    _mapInformationView.layer.cornerRadius = 20.0f;
+    _mapInformationView.clipsToBounds = true;
+    _mapInformationView.frame = CGRectMake(20, self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height + 20, self.view.frame.size.width - 40, self.view.frame.size.height - [UIApplication sharedApplication].statusBarFrame.size.height - self.navigationController.navigationBar.frame.size.height - self.tabBarController.tabBar.frame.size.height - 40);
+    _mapInformationView.hidden = YES;
+    [self.view addSubview:_mapInformationView];
+    
+    _hideButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [_hideButton addTarget:self
+               action:@selector(hideMapInformation:)
+     forControlEvents:UIControlEventTouchUpInside];
+    [_hideButton setTitle:@"×" forState:UIControlStateNormal];
+    [_hideButton.titleLabel setFont:[UIFont systemFontOfSize:30]];
+    _hideButton.frame = CGRectMake(23, self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height + 20 + 3, 40, 40);
+    _hideButton.hidden = YES;
+    [self.view addSubview:_hideButton];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[[UIApplication sharedApplication] keyWindow] addSubview:segmentedControl];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [segmentedControl removeFromSuperview];
+}
+
+- (void)onSegmentedControlChanged:(id)sender {
+    s_sharedApplication.onSegmentedControlChanged(segmentedControl.selectedSegmentIndex);
+}
+
+- (void)showMapInformation:(Information *)info {
+    _mapInformationView.hidden = NO;
+    _hideButton.hidden = NO;
+    
+    NSLog(@"%@", [info title]);
+}
+
+- (void)hideMapInformation:(id)sender {
+    _mapInformationView.hidden = YES;
+    _hideButton.hidden = YES;
 }
 
 // Override to allow orientations other than the default portrait orientation.

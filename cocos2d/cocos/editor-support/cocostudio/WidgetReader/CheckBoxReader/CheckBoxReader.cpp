@@ -45,6 +45,11 @@ namespace cocostudio
         return instanceCheckBoxReader;
     }
     
+    void CheckBoxReader::destroyInstance()
+    {
+        CC_SAFE_DELETE(instanceCheckBoxReader);
+    }
+    
     void CheckBoxReader::setPropsFromBinary(cocos2d::ui::Widget *widget, CocoLoader *cocoLoader, stExpCocoNode *cocoNode)
     {
         
@@ -753,10 +758,10 @@ namespace cocostudio
             checkBox->addChild(label);
         }
         
-        bool selectedstate = options->selectedState();
+        bool selectedstate = options->selectedState() != 0;
         checkBox->setSelected(selectedstate);
         
-        bool displaystate = options->displaystate();
+        bool displaystate = options->displaystate() != 0;
         checkBox->setBright(displaystate);
         checkBox->setEnabled(displaystate);
         

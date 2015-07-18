@@ -13,6 +13,7 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) NSString *baseUrl;
 @property (strong, nonatomic) NSMutableArray *mapArray;
+@property (strong, nonatomic) UIVisualEffectView *mapInformationView;
 
 - (void)mapDataX:(int)x withY:(int)y withFloor:(int)floor;
 

@@ -1,4 +1,4 @@
 # Navinival
 
-This repository is just private now.
-If any question, please send me E-mail.
+This repository is just in private now.
+If any questions, please send me E-mail.

@@ -35,10 +35,10 @@ THE SOFTWARE.
 #define generic GenericFromFreeTypeLibrary
 #define internal InternalFromFreeTypeLibrary
 #include <ft2build.h>
-#include <freetype/freetype.h>
-#include <freetype/ftglyph.h>
-#include <freetype/ftoutln.h>
-#include <freetype/fttrigon.h>
+#include <freetype.h>
+#include <ftglyph.h>
+#include <ftoutln.h>
+#include <fttrigon.h>
 #undef generic
 #undef internal
 
@@ -132,6 +132,7 @@ private:
     int             m_fontFillColorR;
     int             m_fontFillColorG;
     int             m_fontFillColorB;
+    int             m_fontFillColorA;
 };
 
 NS_CC_END

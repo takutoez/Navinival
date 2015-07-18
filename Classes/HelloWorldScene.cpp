@@ -1,12 +1,15 @@
 #include "HelloWorldScene.h"
-#include "3d/CCAnimation3D.h"
-#include "3d/CCAnimate3D.h"
-#include "3d/CCAttachNode.h"
-#include "3d/CCRay.h"
-#include "3d/CCSprite3D.h"
 #include "MapNative.h"
+#include <math.h>
 
 USING_NS_CC;
+
+static HelloWorld *instance;
+
+HelloWorld *HelloWorld::getInstance(){
+    
+    return instance;
+}
 
 Scene* HelloWorld::createScene()
 {
@@ -14,7 +17,7 @@ Scene* HelloWorld::createScene()
     auto scene = Scene::create();
     
     // 'layer' is an autorelease object
-    auto layer = HelloWorld::create();//6
+    auto layer = HelloWorld::create();
 
     // add layer as a child to scene
     scene->addChild(layer);
@@ -33,31 +36,52 @@ bool HelloWorld::init()
         return false;
     }
     
+    instance = this;
+    
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     /////////////////////////////
     // 3. add your codes below...
     
-    mapSprite = Sprite3D::create("map.c3b");
-    mapSprite->setPosition3D(Vec3(0, 0, 0));
+    // create a texture cube
+    auto textureCube = TextureCube::create("sky_left.JPG", "sky_right.JPG","sky_top.JPG", "sky_bottom.JPG","sky_front.JPG", "sky_back.JPG");
+    //create a skybox
+    auto skyBox = Skybox::create();
+    //set cube texture to the skybox
+    skyBox->setTexture(textureCube);
+    addChild(skyBox);
+    skyBox->setScale(1000.0f);
+    
+    story0Sprite = Sprite3D::create("story0.obj");
+    story0Sprite->setPosition3D(Vec3(0, 0, 0));
+    story1Sprite = Sprite3D::create("story1.obj");
+    story1Sprite->setPosition3D(Vec3(0, 0.15, 0));
+    story2Sprite = Sprite3D::create("story2.obj");
+    story2Sprite->setPosition3D(Vec3(0, 0.30, 0));
     
     pinSprite = Sprite3D::create("pin.c3b");
     pinSprite->setPosition3D(Vec3(0, 0, 0));
     pinSprite->setScale(0.1);
     addChild(pinSprite);
-    addChild(mapSprite);
+    addChild(story0Sprite);
+    addChild(story1Sprite);
+    addChild(story2Sprite);
     
-    camera = Camera::createPerspective(60, (GLfloat)visibleSize.width/visibleSize.height, 0.01, 1000);
+    mapPosition = Vec2(2338, 2856);
+    CCLOG("%f", 0.15f * tan(M_PI/4 - atan2(0.10f,0.15f)));
+    story = 0;
+    
+    camera = Camera::createPerspective(90, (GLfloat)visibleSize.width/visibleSize.height, 0.01, 1000);
     
     // set parameters for camera
-    camera->setPosition3D(Vec3(0, 0.15, 0.15));
+    camera->setPosition3D(Vec3(0, 0.15, 0.10));
     camera->lookAt(Vec3(0, 0, 0), Vec3(0, 1, 0));
     
     addChild(camera); //add camera to the scene
     
-    auto light = DirectionLight::create(Vec3(-1.0f, -1.0f, 0.0f), Color3B::WHITE);
-    addChild (light);
+    auto light = DirectionLight::create(Vec3(-0.0001f, -0.0001f, 0.0f), Color3B::WHITE);
+    //addChild (light);
     
     auto r = 0.1f;
     
@@ -66,7 +90,7 @@ bool HelloWorld::init()
     auto forward = MoveBy::create(5.0f, Vec3(0, 0, r));
     auto left = MoveBy::create(5.0f, Vec3(+r , 0, 0));
     
-    auto sequence = Sequence::create(back, right, forward, left, NULL);
+    auto sequence = Sequence::create(forward, NULL);
     
     pinSprite->runAction(RepeatForever::create(sequence));
     
@@ -91,8 +115,11 @@ bool HelloWorld::onTouchBegan(Touch *touch, Event *event){
 void HelloWorld::onTouchMoved(Touch *touch, Event *event){
     auto location = touch[0].getLocation();
     Point newLocation = touch[0].getPreviousLocation()-location;
-    mapSprite->runAction(EaseSineInOut::create(MoveBy::create(0.2, Vec3(-newLocation.x*0.0003, 0, newLocation.y*0.0003))));
-    pinSprite->runAction(EaseSineInOut::create(MoveBy::create(0.2, Vec3(-newLocation.x*0.0003, 0, newLocation.y*0.0003))));
+    story0Sprite->runAction(EaseBackOut::create(MoveBy::create(0.2, Vec3(-newLocation.x*0.0003, 0, newLocation.y*0.0003))));
+    story1Sprite->runAction(EaseBackOut::create(MoveBy::create(0.2, Vec3(-newLocation.x*0.0003, 0, newLocation.y*0.0003))));
+    story2Sprite->runAction(EaseBackOut::create(MoveBy::create(0.2, Vec3(-newLocation.x*0.0003, 0, newLocation.y*0.0003))));
+    pinSprite->runAction(EaseBackOut::create(MoveBy::create(0.2, Vec3(-newLocation.x*0.0003, 0, newLocation.y*0.0003))));
+    mapPosition += Vec2(newLocation.x*0.0003*2856, -newLocation.y*0.0003*2856);
 }
 
 void HelloWorld::onTouchEnded(Touch *touch, Event *event){
@@ -101,64 +128,42 @@ void HelloWorld::onTouchEnded(Touch *touch, Event *event){
     if(newLocation.length() < 30){
         Point screenPoint = Vec2(touch->getLocationInView().x, touch->getLocationInView().y);
         Point point = HelloWorld::transformPoint(screenPoint);
-        CCLOG("%f, %f", point.x, point.y);
-        MapNative::mapData(round(point.x), round(point.y), 1);//後で1, つまり階のシステムを構築する
+        
+        MapNative::mapData(round(point.x), round(point.y), 0);//後で0, つまり階のシステムを構築する
     }
 }
 
 Point HelloWorld::transformPoint(Point point)
 {
+    Vec3 start(point.x, point.y, 0.0f), end(point.x, point.y, 1.0f);
     
-    Vec4 start = unProjectPoint(Vec3(point.x, point.y, 0));
-    Vec4 end = unProjectPoint(Vec3(point.x, point.y, -1));
+    auto size = Director::getInstance()->getWinSize();
+    camera->unproject(size, &start, &start);
+    camera->unproject(size, &end, &end);
     
-    Vec4 rayDir = end - start;
+    Vec3 rayDir = end - start;
     rayDir.normalize();
-    Vec4 normal = Vec4(0.15, 0.15, 0.0, 0);
+    Vec3 normal = Vec3(0, 1, 0);
     
     float rayDirDotNorm = rayDir.dot(normal);
-    float P0DotNorm = start.dot(normal);
+    float P0DotNorm = -start.dot(normal);
     
-    float t = 0;
-    
-    if (rayDirDotNorm != 0) {
-        t = -P0DotNorm / rayDirDotNorm;
-    }
-    
-    Vec4 result = (rayDir * t) + start;
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    return Point(result.x, result.y);//2338, 2856
+    Vec3 result = (rayDir * (P0DotNorm / rayDirDotNorm)) + start;
+    //float height = 0.15f * tan(M_PI/4 + atan2(0.10f, 0.15f)) + 0.15f * tan(M_PI/4 - atan2(0.10f,0.15f));//あとでちゃんとした計算で求める
+    float height = 0.30;
+    //float width = hypotf(0.10f, 0.15f) / cos(M_PI/4);//あとでちゃんとした計算で求める
+    float width = 0.18;
+    CCLOG("WIDTH:%f HEIGHT:%f", result.x/size.width - 0.5, result.z/size.height + 0.5);
+    float x = mapPosition.x + (result.x/size.width - 0.5)*width*2856;
+    float y = mapPosition.y + (result.z/size.height + 0.32)*height*2856;
+    CCLOG("%f %f", mapPosition.x, mapPosition.y);
+    return Point(x, y);
 }
 
-Vec4 HelloWorld::unProjectPoint(Vec3 point)
-{
-    
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Rect viewPort = Rect(0, 0, visibleSize.width, visibleSize.height);
-    
-    Director *d = Director::getInstance();
-    
-    Mat4 projectionMatrix = d->getMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_PROJECTION);
-    Mat4 modelView = _modelViewTransform;
-    Mat4 finalMatrix = projectionMatrix * _modelViewTransform;
-    assert(finalMatrix.inverse());
-    
-    Vec4 in = Vec4(point.x, point.y, point.z, 1);
-    in.x = (in.x - viewPort.origin.x) / viewPort.size.width;
-    in.y = (in.y - viewPort.origin.y) / viewPort.size.height;
-    
-    in.x = in.x * 2 -1;
-    in.y = in.y * 2 -1;
-    in.z = in.z * 2 -1;
-    
-    Vec4 out = finalMatrix * in;
-    assert(out.w != 0);
-    
-    out.x /= out.w;
-    out.y /= out.w;
-    out.z /= out.w;
-    out.w /= out.w;
-    
-    return out;
-    
+void HelloWorld::onSegmentedControlChanged(int changedStory){
+    story0Sprite->runAction(EaseInOut::create(MoveBy::create(1.0, Vec3(0, (story - changedStory)*0.15, 0)), 2));
+    story1Sprite->runAction(EaseInOut::create(MoveBy::create(1.0, Vec3(0, (story - changedStory)*0.15, 0)), 2));
+    story2Sprite->runAction(EaseInOut::create(MoveBy::create(1.0, Vec3(0, (story - changedStory)*0.15, 0)), 2));
+    pinSprite->runAction(EaseInOut::create(MoveBy::create(1.0, Vec3(0, (story - changedStory)*0.15, 0)), 2));
+    story = changedStory;
 }
