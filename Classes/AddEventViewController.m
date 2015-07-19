@@ -107,7 +107,7 @@ int placeTapCounter;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"doneAddEventUnwind"] && !remove){
-        Information *info = [Information title:self.TitleField.text time:self.Time.text content:self.MemoTextView.text image:@""];
+        Information *info = [Information title:self.TitleField.text time:self.Time.text content:self.MemoTextView.text image:@"" good:@""];
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         NSArray *array = [userDefaults arrayForKey:@"EVENTS"];
         NSMutableArray *mutableArray = [NSMutableArray arrayWithArray:array];

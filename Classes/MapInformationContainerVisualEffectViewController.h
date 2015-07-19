@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MapInformationContainerVisualEffectViewController : UIViewController
+@interface MapInformationContainerVisualEffectViewController :UIViewController
 
 @end

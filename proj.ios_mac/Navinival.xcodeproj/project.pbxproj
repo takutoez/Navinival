@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1C1291611B3C2050008A4EC4 /* good@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C12915F1B3C2050008A4EC4 /* good@3x.png */; };
-		1C172E191B3D8457005237C0 /* MapInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C172E181B3D8457005237C0 /* MapInformationViewController.m */; };
+		1C172E191B3D8457005237C0 /* MapInformationViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1C172E181B3D8457005237C0 /* MapInformationViewController.mm */; };
 		1C25F1EC1B587DB700505141 /* story0.blend in Resources */ = {isa = PBXBuildFile; fileRef = 1C25F1DE1B587DB700505141 /* story0.blend */; };
 		1C25F1ED1B587DB700505141 /* story0.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 1C25F1DF1B587DB700505141 /* story0.mtl */; };
 		1C25F1EE1B587DB700505141 /* story0.obj in Resources */ = {isa = PBXBuildFile; fileRef = 1C25F1E01B587DB700505141 /* story0.obj */; };
@@ -149,7 +149,7 @@
 /* Begin PBXFileReference section */
 		1C12915F1B3C2050008A4EC4 /* good@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "good@3x.png"; sourceTree = "<group>"; };
 		1C172E171B3D8457005237C0 /* MapInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapInformationViewController.h; sourceTree = "<group>"; };
-		1C172E181B3D8457005237C0 /* MapInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapInformationViewController.m; sourceTree = "<group>"; };
+		1C172E181B3D8457005237C0 /* MapInformationViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MapInformationViewController.mm; sourceTree = "<group>"; };
 		1C25F1DE1B587DB700505141 /* story0.blend */ = {isa = PBXFileReference; lastKnownFileType = file; path = story0.blend; sourceTree = "<group>"; };
 		1C25F1DF1B587DB700505141 /* story0.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = story0.mtl; sourceTree = "<group>"; };
 		1C25F1E01B587DB700505141 /* story0.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = story0.obj; sourceTree = "<group>"; };
@@ -520,7 +520,7 @@
 				1CCCD2571B58AC6D0010E3F6 /* MapInformationContainerVisualEffectViewController.h */,
 				1CCCD2581B58AC6D0010E3F6 /* MapInformationContainerVisualEffectViewController.m */,
 				1C172E171B3D8457005237C0 /* MapInformationViewController.h */,
-				1C172E181B3D8457005237C0 /* MapInformationViewController.m */,
+				1C172E181B3D8457005237C0 /* MapInformationViewController.mm */,
 				1C4661811A8B96640025B3D1 /* PlanViewController.h */,
 				1C4661821A8B96640025B3D1 /* PlanViewController.m */,
 				1C7E34311AE8FC9600257C1E /* InformationViewController.h */,
@@ -770,7 +770,7 @@
 				1C7E34361AE8FE5F00257C1E /* SettingsViewController.m in Sources */,
 				1CCCD2591B58AC6D0010E3F6 /* MapInformationContainerVisualEffectViewController.m in Sources */,
 				1C7E34331AE8FC9600257C1E /* InformationViewController.m in Sources */,
-				1C172E191B3D8457005237C0 /* MapInformationViewController.m in Sources */,
+				1C172E191B3D8457005237C0 /* MapInformationViewController.mm in Sources */,
 				1C6370E11B52A8FD00E35E11 /* NavigationBarWithSegmentedControl.m in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				1C4661951A8B97B40025B3D1 /* EventTitleTableViewCell.m in Sources */,

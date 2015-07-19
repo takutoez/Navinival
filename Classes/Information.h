@@ -13,15 +13,17 @@
     NSString *time;
     NSString *content;
     NSString *image;
+    NSString *good;
 }
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *time;
 @property (nonatomic, copy) NSString *content;
 @property (nonatomic, copy) NSString *image;
+@property (nonatomic, copy) NSString *good;
 
 
 
-+ (id)title:(NSString*)title time:(NSString*)time content:(NSString*)content image:(NSString*)image;
++ (id)title:(NSString*)title time:(NSString*)time content:(NSString*)content image:(NSString*)image good:(NSString *)good;
 
 @end

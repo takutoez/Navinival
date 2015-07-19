@@ -8,8 +8,8 @@
 
 #import "MyAppDelegate.h"
 #import <Parse/Parse.h>
-#import "RootViewController.h"
 #import "Information.h"
+#import "RootViewController.h"
 
 @interface MyAppDelegate ()
 
@@ -99,7 +99,7 @@
                 NSLog(@"%d: %@", idx, obj);
             
                 if ([[obj objectForKey:@"number"] intValue] == number) {
-                    [(RootViewController *)[[((UITabBarController *)self.window.rootViewController) viewControllers] objectAtIndex:0].childViewControllers[0] showMapInformation:[Information title:[obj objectForKey:@"title"] time:[obj objectForKey:@"time"] content:[obj objectForKey:@"content"] image:[obj objectForKey:@"image"]]];
+                    [(RootViewController *)[[((UITabBarController *)self.window.rootViewController) viewControllers] objectAtIndex:0].childViewControllers[0] showMapInformation:[NSString stringWithFormat: @"%ld", (long)number]];
                     *stop = YES;
                 }
             }];

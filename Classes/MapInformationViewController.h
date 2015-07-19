@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MyAppDelegate.h"
+#import "RootViewController.h"
+#import "MapInformationContainerVisualEffectViewController.h"
 
 @interface MapInformationViewController : UITableViewController
+
+@property (strong, nonatomic)NSMutableArray *informationArray;
+
+- (void)loadDataWithNumber:(NSString *)number;
+- (void)loadDataGoodList;
 
 @end

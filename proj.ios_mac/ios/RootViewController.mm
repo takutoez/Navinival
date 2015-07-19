@@ -81,12 +81,13 @@ static AppDelegate s_sharedApplication;
     [segmentedControl addTarget:self action:@selector(onSegmentedControlChanged:) forControlEvents: UIControlEventValueChanged];
     segmentedControl.selectedSegmentIndex = 0;
     
-    UIViewController *mapInformationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"mapInformation"];
-    _mapInformationView = mapInformationViewController.view;
+     MapInformationContainerVisualEffectViewController *mapInformationContaienrViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"mapInformation"];
+    _mapInformationView = mapInformationContaienrViewController.view;
     _mapInformationView.layer.cornerRadius = 20.0f;
     _mapInformationView.clipsToBounds = true;
     _mapInformationView.frame = CGRectMake(20, self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height + 20, self.view.frame.size.width - 40, self.view.frame.size.height - [UIApplication sharedApplication].statusBarFrame.size.height - self.navigationController.navigationBar.frame.size.height - self.tabBarController.tabBar.frame.size.height - 40);
     _mapInformationView.hidden = YES;
+    [self addChildViewController:mapInformationContaienrViewController];
     [self.view addSubview:_mapInformationView];
     
     _hideButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -114,11 +115,24 @@ static AppDelegate s_sharedApplication;
     s_sharedApplication.onSegmentedControlChanged(segmentedControl.selectedSegmentIndex);
 }
 
-- (void)showMapInformation:(Information *)info {
+- (void)showMapInformation:(NSString *)number {
     _mapInformationView.hidden = NO;
     _hideButton.hidden = NO;
     
-    NSLog(@"%@", [info title]);
+    if ([self.delegate respondsToSelector:@selector(loadDataWithNumber:)]) {
+        [self.delegate loadDataWithNumber:number];
+    }
+}
+
+- (void)showGoodList {
+    _mapInformationView.hidden = NO;
+    _hideButton.hidden = NO;
+    
+    [((MapInformationViewController *)((MapInformationContainerVisualEffectViewController *)self.childViewControllers[0]).childViewControllers[0]) loadDataGoodList];
+    
+    if ([self.delegate respondsToSelector:@selector(loadDataGoodList)]) {
+        [self.delegate loadDataGoodList];
+    }
 }
 
 - (void)hideMapInformation:(id)sender {
@@ -179,4 +193,7 @@ static AppDelegate s_sharedApplication;
 }
 
 
+- (IBAction)goodListButton:(id)sender {
+    [self showGoodList];
+}
 @end

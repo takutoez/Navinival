@@ -34,8 +34,6 @@
 }
 */
 
-
-
 - (IBAction)hideButton:(id)sender {
     self.view.hidden = YES;
 }

@@ -25,17 +25,29 @@
 
 #import <UIKit/UIKit.h>
 #include "HelloWorldScene.h"
+#import "MapInformationContainerVisualEffectViewController.h"
 #import "MapInformationViewController.h"
 #import "Information.h"
 
+@protocol RootViewDelegate <NSObject>
+
+- (void)loadDataWithNumber:(NSString *)number;
+- (void)loadDataGoodList;
+
+@end
 
 @interface RootViewController : UIViewController {
     UIWindow *window;
     UISegmentedControl *segmentedControl;
 }
 
+@property (strong, nonatomic) id<RootViewDelegate> delegate;
+
 @property (strong, nonatomic) UIView *mapInformationView;
 @property (strong, nonatomic) UIButton *hideButton;
-- (void)showMapInformation:(Information *)info;
+- (void)showMapInformation:(NSString *)number;
+- (void)showGoodList;
+
+- (IBAction)goodListButton:(id)sender;
 
 @end

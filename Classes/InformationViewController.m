@@ -62,7 +62,7 @@
                                 _array = [NSMutableArray array];
                                 for (NSDictionary *jsonDictionary in jsonArray)
                                 {
-                                    [_array addObject:[Information title:[jsonDictionary objectForKey:@"title"] time:[jsonDictionary objectForKey:@"time"] content:[jsonDictionary objectForKey:@"content"] image:[NSString stringWithFormat:@"%@%@", BASE_URL, [jsonDictionary objectForKey:@"image"]]]];
+                                    [_array addObject:[Information title:[jsonDictionary objectForKey:@"title"] time:[jsonDictionary objectForKey:@"time"] content:[jsonDictionary objectForKey:@"content"] image:[NSString stringWithFormat:@"%@%@", BASE_URL, [jsonDictionary objectForKey:@"image"]] good:[jsonDictionary objectForKey:@"good"]]];
                                 }
                                 [[self tableView] reloadData];
                                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
