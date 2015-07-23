@@ -81,12 +81,12 @@ static AppDelegate s_sharedApplication;
     [segmentedControl addTarget:self action:@selector(onSegmentedControlChanged:) forControlEvents: UIControlEventValueChanged];
     segmentedControl.selectedSegmentIndex = 0;
     
-     MapInformationContainerVisualEffectViewController *mapInformationContaienrViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"mapInformation"];
+     MapInformationContainerVisualEffectViewController *mapInformationContaienrViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"mapInformationContainer"];
     _mapInformationView = mapInformationContaienrViewController.view;
     _mapInformationView.layer.cornerRadius = 20.0f;
     _mapInformationView.clipsToBounds = true;
     _mapInformationView.frame = CGRectMake(20, self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height + 20, self.view.frame.size.width - 40, self.view.frame.size.height - [UIApplication sharedApplication].statusBarFrame.size.height - self.navigationController.navigationBar.frame.size.height - self.tabBarController.tabBar.frame.size.height - 40);
-    _mapInformationView.hidden = YES;
+    _mapInformationView.alpha = 0;
     [self addChildViewController:mapInformationContaienrViewController];
     [self.view addSubview:_mapInformationView];
     
@@ -97,7 +97,7 @@ static AppDelegate s_sharedApplication;
     [_hideButton setTitle:@"×" forState:UIControlStateNormal];
     [_hideButton.titleLabel setFont:[UIFont systemFontOfSize:30]];
     _hideButton.frame = CGRectMake(23, self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height + 20 + 3, 40, 40);
-    _hideButton.hidden = YES;
+    _hideButton.alpha = 0;
     [self.view addSubview:_hideButton];
 }
 
@@ -116,28 +116,84 @@ static AppDelegate s_sharedApplication;
 }
 
 - (void)showMapInformation:(NSString *)number {
-    _mapInformationView.hidden = NO;
-    _hideButton.hidden = NO;
     
-    if ([self.delegate respondsToSelector:@selector(loadDataWithNumber:)]) {
-        [self.delegate loadDataWithNumber:number];
+    if(_mapInformationView.alpha == 0){
+        _mapInformationView.transform = CGAffineTransformMakeScale(0.9, 0.9);
+        
+        [UIView animateWithDuration:0.5
+                              delay:0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^{
+                             _mapInformationView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                             _mapInformationView.alpha = 1.0;
+                         }
+                         completion:nil];
+        
+        [UIView animateWithDuration:0.2
+                              delay:0.3
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^{
+                             _hideButton.alpha = 1.0;
+                         }
+                         completion:nil];
     }
+    
+    [((MapInformationContainerVisualEffectViewController *)self.childViewControllers[0]) changeTitleMapInformation];
+    
+    [((MapInformationViewController *)((MapInformationContainerVisualEffectViewController *)self.childViewControllers[0]).childViewControllers[0].childViewControllers[0]) loadDataWithNumber:number];
+    
 }
 
 - (void)showGoodList {
-    _mapInformationView.hidden = NO;
-    _hideButton.hidden = NO;
     
-    [((MapInformationViewController *)((MapInformationContainerVisualEffectViewController *)self.childViewControllers[0]).childViewControllers[0]) loadDataGoodList];
+    if(_mapInformationView.alpha == 0){
+        _mapInformationView.transform = CGAffineTransformMakeScale(0.9, 0.9);
     
-    if ([self.delegate respondsToSelector:@selector(loadDataGoodList)]) {
-        [self.delegate loadDataGoodList];
+        [UIView animateWithDuration:0.5
+                              delay:0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                        animations:^{
+                            _mapInformationView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                            _mapInformationView.alpha = 1.0;
+                        }
+                         completion:nil];
+        
+        [UIView animateWithDuration:0.2
+                              delay:0.3
+                            options:UIViewAnimationOptionCurveEaseInOut
+                        animations:^{
+                             _hideButton.alpha = 1.0;
+                        }
+                         completion:nil];
     }
+    
+    [((MapInformationContainerVisualEffectViewController *)self.childViewControllers[0]) changeTitleGoodList];
+    
+    
+    [((MapInformationViewController *)((MapInformationContainerVisualEffectViewController *)self.childViewControllers[0]).childViewControllers[0].childViewControllers[0]) loadDataGoodList];
 }
 
 - (void)hideMapInformation:(id)sender {
-    _mapInformationView.hidden = YES;
-    _hideButton.hidden = YES;
+    
+    if(_mapInformationView.alpha == 1){
+        
+        [UIView animateWithDuration:0.5
+                              delay:0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^{
+                             _mapInformationView.transform = CGAffineTransformMakeScale(0.9, 0.9);
+                             _mapInformationView.alpha = 0;
+                         }
+                         completion:nil];
+        
+        [UIView animateWithDuration:0.1
+                              delay:0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^{
+                             _hideButton.alpha = 0;
+                         }
+                         completion:nil];
+    }
 }
 
 // Override to allow orientations other than the default portrait orientation.

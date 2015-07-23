@@ -113,6 +113,7 @@
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
+		D56144EC1B5E173300AD0246 /* DetailMapInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D56144EB1B5E173300AD0246 /* DetailMapInformationViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -282,6 +283,8 @@
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D56144EA1B5E173300AD0246 /* DetailMapInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailMapInformationViewController.h; sourceTree = "<group>"; };
+		D56144EB1B5E173300AD0246 /* DetailMapInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailMapInformationViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -521,6 +524,8 @@
 				1CCCD2581B58AC6D0010E3F6 /* MapInformationContainerVisualEffectViewController.m */,
 				1C172E171B3D8457005237C0 /* MapInformationViewController.h */,
 				1C172E181B3D8457005237C0 /* MapInformationViewController.mm */,
+				D56144EA1B5E173300AD0246 /* DetailMapInformationViewController.h */,
+				D56144EB1B5E173300AD0246 /* DetailMapInformationViewController.m */,
 				1C4661811A8B96640025B3D1 /* PlanViewController.h */,
 				1C4661821A8B96640025B3D1 /* PlanViewController.m */,
 				1C7E34311AE8FC9600257C1E /* InformationViewController.h */,
@@ -771,6 +776,7 @@
 				1CCCD2591B58AC6D0010E3F6 /* MapInformationContainerVisualEffectViewController.m in Sources */,
 				1C7E34331AE8FC9600257C1E /* InformationViewController.m in Sources */,
 				1C172E191B3D8457005237C0 /* MapInformationViewController.mm in Sources */,
+				D56144EC1B5E173300AD0246 /* DetailMapInformationViewController.m in Sources */,
 				1C6370E11B52A8FD00E35E11 /* NavigationBarWithSegmentedControl.m in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				1C4661951A8B97B40025B3D1 /* EventTitleTableViewCell.m in Sources */,
@@ -824,7 +830,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TAKUTO MUGURUMA (72223GX989)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -853,7 +859,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = innew.ios.Navinival;
 				PRODUCT_NAME = "Navinival iOS";
-				PROVISIONING_PROFILE = "5762f24a-f7d5-4cba-8432-60ae1e7fa5b4";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos9.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -869,7 +875,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TAKUTO MUGURUMA (72223GX989)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -896,7 +902,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = innew.ios.Navinival;
 				PRODUCT_NAME = "Navinival iOS";
-				PROVISIONING_PROFILE = "5762f24a-f7d5-4cba-8432-60ae1e7fa5b4";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos9.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";

@@ -10,4 +10,11 @@
 
 @interface MapInformationContainerVisualEffectViewController :UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+
+- (void)changeTitleMapInformation;
+- (void)changeTitleGoodList;
+- (void)appearStatus: (NSString *)status;
+
 @end

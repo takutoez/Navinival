@@ -17,8 +17,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                             forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.translucent = YES;
+    
     self.tableView.tableFooterView = [[UIView alloc] init];
 
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -32,16 +41,15 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView
         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView
-                             dequeueReusableCellWithIdentifier:@"cell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     
     UILabel *label1 = (UILabel*)[cell viewWithTag:1];
     UILabel *label2 = (UILabel*)[cell viewWithTag:2];
     UILabel *label3 = (UILabel*)[cell viewWithTag:3];
-    
-    label1.text = @"・";
+
+    label1.text = [NSString stringWithFormat: @"%ld", (long)indexPath.row+1];
     label2.text = [[_informationArray objectAtIndex:indexPath.row] objectForKey:@"title"];
-    label3.text = [[[_informationArray objectAtIndex:indexPath.row] objectForKey:@"good"] stringValue];
+    label3.text = [NSString stringWithFormat:@"%@%@", [[[_informationArray objectAtIndex:indexPath.row] objectForKey:@"good"] stringValue], @"Goods"];
     
     return cell;
 }
@@ -59,14 +67,17 @@
                             }else{
                                 NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
                                 _informationArray = [NSMutableArray array];
-                                for (NSDictionary *jsonDictionary in jsonArray)
-                                {
-                                    [_informationArray addObject:jsonDictionary];
+                                if(jsonArray.count != 0){
+                                    for (NSDictionary *jsonDictionary in jsonArray)
+                                    {
+                                        [_informationArray addObject:jsonDictionary];
+                                    }
+                                }else{
+                                    [((MapInformationContainerVisualEffectViewController *)self.parentViewController.parentViewController) appearStatus:@"情報がありません"];
                                 }
+                                [self.tableView reloadData];
                             }
                         }] resume];
-    
-    [self.tableView reloadData];
 }
 
 - (void)loadDataGoodList {
@@ -82,14 +93,33 @@
                             }else{
                                 NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
                                 _informationArray = [NSMutableArray array];
-                                for (NSDictionary *jsonDictionary in jsonArray)
-                                {
-                                    [_informationArray addObject:jsonDictionary];
+                                if(jsonArray.count != 0){
+                                    for (NSDictionary *jsonDictionary in jsonArray)
+                                    {
+                                        [_informationArray addObject:jsonDictionary];
+                                    }
+                                }else{
+                                    [((MapInformationContainerVisualEffectViewController *)self.parentViewController.parentViewController) appearStatus:@"情報がありません"];
                                 }
-                                NSLog(@"%lu",(unsigned long)[_informationArray count]);
                                 [self.tableView reloadData];
                             }
                         }] resume];
+    
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    if (indexPath) {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
+    
+    DetailMapInformationViewController *destinationViewController = [segue destinationViewController];
+    destinationViewController.mapNumber = [[_informationArray objectAtIndex:indexPath.row]objectForKey:@"map"];
+    destinationViewController.informationNumber = [[_informationArray objectAtIndex:indexPath.row]objectForKey:@"number"];
+    destinationViewController.titleString = [[_informationArray objectAtIndex:indexPath.row]objectForKey:@"title"];
+    destinationViewController.contentString = [[_informationArray objectAtIndex:indexPath.row] objectForKey:@"content"];
+    destinationViewController.goodString = [[[_informationArray objectAtIndex:indexPath.row] objectForKey:@"good"] stringValue];
     
 }
 

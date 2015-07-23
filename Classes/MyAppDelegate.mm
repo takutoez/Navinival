@@ -96,8 +96,6 @@
     
     if((lowerLeftX - upperLeftX) * (point.y - upperLeftY) - (lowerLeftY - upperLeftY) * (point.x - upperLeftX) < 0 && (lowerRightX - lowerLeftX) * (point.y - lowerLeftY) - (lowerRightY - lowerLeftY) * (point.x - lowerLeftX) < 0 && (upperRightX - lowerRightX) * (point.y - lowerRightY) - (upperRightY - lowerRightY) * (point.x - lowerRightX) < 0 && (upperLeftX - upperRightX) * (point.y - upperRightY) - (upperLeftY - upperRightY) * (point.x - upperRightX) < 0){
             [_mapArray enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
-                NSLog(@"%d: %@", idx, obj);
-            
                 if ([[obj objectForKey:@"number"] intValue] == number) {
                     [(RootViewController *)[[((UITabBarController *)self.window.rootViewController) viewControllers] objectAtIndex:0].childViewControllers[0] showMapInformation:[NSString stringWithFormat: @"%ld", (long)number]];
                     *stop = YES;

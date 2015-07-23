@@ -10,6 +10,7 @@
 #import "MyAppDelegate.h"
 #import "RootViewController.h"
 #import "MapInformationContainerVisualEffectViewController.h"
+#import "DetailMapInformationViewController.h"
 
 @interface MapInformationViewController : UITableViewController
 
