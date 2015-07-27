@@ -8,22 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Information : NSObject {
-    NSString *title;
-    NSString *time;
-    NSString *content;
-    NSString *image;
-    NSString *good;
-}
+@interface Information : NSObject
 
 @property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *map;
 @property (nonatomic, copy) NSString *time;
 @property (nonatomic, copy) NSString *content;
 @property (nonatomic, copy) NSString *image;
 @property (nonatomic, copy) NSString *good;
 
-
-
-+ (id)title:(NSString*)title time:(NSString*)time content:(NSString*)content image:(NSString*)image good:(NSString *)good;
++ (id)title:(NSString*)title map:(NSString*)map time:(NSString*)time content:(NSString*)content image:(NSString*)image good:(NSString *)good;
 
 @end

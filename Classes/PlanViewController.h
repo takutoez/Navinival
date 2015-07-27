@@ -12,4 +12,7 @@
 @interface PlanViewController : UIViewController
 
 @property Information *info;
+
+- (IBAction)addEvent:(id)sender;
+
 @end

@@ -29,6 +29,7 @@
     _imageView.layer.mask = gradientLayer;
 
     _detailTitle.text = _info.title;
+    _detailMeta.text = [NSString stringWithFormat:@"%@ %@", _info.time, _info.map];
     if (_image){
         _detailImage.image = _image;
     }else{

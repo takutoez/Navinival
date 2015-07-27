@@ -9,6 +9,7 @@
 #import "PlanViewController.h"
 #import "FirstDayTableViewController.h"
 #import "SecondDayTableViewController.h"
+#import "UIViewController+NYBackTransition.h"
 
 @interface PlanViewController ()
 
@@ -28,6 +29,13 @@
 }
 
 - (IBAction)cancelAddEventUnwind:(UIStoryboardSegue *)segue{
+    
+}
+
+- (IBAction)addEvent:(id)sender {
+    
+    UINavigationController *addEventNavigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"addEventNavigation"];
+    [self presentViewControllerWithBackTransition:addEventNavigationController completion:nil];
     
 }
 

@@ -10,6 +10,7 @@
 #import "FirstDayTableViewController.h"
 #import "SecondDayTableViewController.h"
 #import "PlanViewController.h"
+#import "UIViewController+NYBackTransition.h"
 
 @interface AddEventViewController (){
     
@@ -20,19 +21,14 @@
 @end
 
 @implementation AddEventViewController
-@synthesize pinX, pinY, cancel, edit, information, remove, eventDictionary, eventIndex;
-
-int placeTapCounter;
+@synthesize cancel, edit, information, remove, eventDictionary, eventIndex;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [self toggleCellVissibility:self.DatePicker animated:NO];
-    [self toggleCellVissibility:self.PlacePicker animated:NO];
     self.MemoTextView.placeholder = @"メモ";
-    
-    self.PlaceSwitch.on = NO;
     
     self.doneButton.enabled = NO;
     
@@ -40,31 +36,23 @@ int placeTapCounter;
     [self.dateFormatter setDateFormat:@"M/d H:mm"];
     [self.dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"]];
     
-    placeTapCounter = 0;
-    
     if(edit){
         self.navigationItem.title = @"イベントを編集";
         self.TitleField.text = [eventDictionary objectForKey:@"TITLE"];
         self.Time.text = [eventDictionary objectForKey:@"TIME"];
-        pinX = [[eventDictionary objectForKey:@"X"] floatValue];
-        pinY = [[eventDictionary objectForKey:@"Y"] floatValue];
         self.MemoTextView.text = [eventDictionary objectForKey:@"CONTENT"];
         self.Picker.date = [self.dateFormatter dateFromString:self.Time.text];
         NSLog(@"%@", [self.dateFormatter dateFromString:self.Time.text]);
         self.doneButton.enabled = YES;
-        if(pinX < 1000000.0f && pinY < 1000000.0f) self.PlaceSwitch.on = YES;
     }else{
         [self toggleCellVissibility:self.removeCell animated:NO];
         if(information){
             self.TitleField.text = [eventDictionary objectForKey:@"TITLE"];
             self.Time.text = [eventDictionary objectForKey:@"TIME"];
-            pinX = [[eventDictionary objectForKey:@"X"] floatValue];
-            pinY = [[eventDictionary objectForKey:@"Y"] floatValue];
             self.MemoTextView.text = [eventDictionary objectForKey:@"CONTENT"];
             self.Picker.date = [self.dateFormatter dateFromString:self.Time.text];
             NSLog(@"%@", [self.dateFormatter dateFromString:self.Time.text]);
             self.doneButton.enabled = YES;
-            if(pinX < 1000000.0f && pinY < 1000000.0f && pinX != 0.0f && pinY != 0.0f) self.PlaceSwitch.on = YES;
         }
         cancel =
         [[UIBarButtonItem alloc]
@@ -86,12 +74,7 @@ int placeTapCounter;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(indexPath.section == 0 && indexPath.row == 1)
         [self toggleCellVissibility:self.DatePicker animated:YES];
-    if(indexPath.section == 1 && indexPath.row == 0){
-        [self toggleCellVissibility:self.PlacePicker animated:YES];
-        placeTapCounter++;
-        if(!self.PlaceSwitch.on)
-            self.PlaceSwitch.on = YES;
-    }
+
     if(indexPath.section == 2){
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         NSArray *array = [userDefaults arrayForKey:@"EVENTS"];
@@ -107,7 +90,7 @@ int placeTapCounter;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"doneAddEventUnwind"] && !remove){
-        Information *info = [Information title:self.TitleField.text time:self.Time.text content:self.MemoTextView.text image:@"" good:@""];
+        Information *info = [Information title:self.TitleField.text map:nil time:self.Time.text content:self.MemoTextView.text image:nil good:nil];
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         NSArray *array = [userDefaults arrayForKey:@"EVENTS"];
         NSMutableArray *mutableArray = [NSMutableArray arrayWithArray:array];
@@ -165,13 +148,6 @@ int placeTapCounter;
     }
 }
 
-- (IBAction)placeSwitch:(id)sender {
-    if(placeTapCounter % 2 != 0 || placeTapCounter == 0){
-    [self toggleCellVissibility:self.PlacePicker animated:YES];
-    placeTapCounter++;
-    }
-}
-
 - (IBAction)editingChangedTitleField:(id)sender {
     if(![self.TitleField.text isEqualToString:@""] && ![self.Time.text isEqualToString:@"未設定"]){
         self.doneButton.enabled = YES;
@@ -181,7 +157,7 @@ int placeTapCounter;
 }
 
 - (void)cancel:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerWithBackTransitionCompletion:nil];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

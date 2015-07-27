@@ -28,7 +28,7 @@
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"一覧" style:UIBarButtonItemStylePlain target:nil action:nil];
     dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM/dd HH:mm"];
-    date = [dateFormatter dateFromString:@"10/11 9:00"];
+    date = [dateFormatter dateFromString:@"10/10 9:00"];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

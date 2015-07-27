@@ -24,10 +24,11 @@
     
     [Parse setApplicationId:@"ERYPrORJqGmfiaQN66gNPCyhX30i9ZtMnRMf2BeS"
                   clientKey:@"zbFmvecCs7LoqXRJ1bZNpSVH8yX9oKmposYb9GTn"];
-    
+
     UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
                                                     UIUserNotificationTypeBadge |
                                                     UIUserNotificationTypeSound);
+    
     UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
                                                                              categories:nil];
     [application registerUserNotificationSettings:settings];
@@ -51,6 +52,8 @@
                                     [_mapArray addObject:jsonDictionary];
                                 }
                             }
+                            
+                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                         }] resume];
     
     return YES;
@@ -60,14 +63,15 @@
     // Store the deviceToken in the current installation and save it to Parse.
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
-    currentInstallation.channels = @[ @"global" ];
     [currentInstallation saveInBackground];
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;//バッジを消す
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+
     [PFPush handlePush:userInfo];
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

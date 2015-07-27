@@ -14,4 +14,6 @@
 @property (strong,nonatomic) NSMutableArray *array;
 @property (strong,nonatomic) NSMutableArray *imageArray;
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *sendButton;
+
 @end

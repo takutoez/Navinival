@@ -50,13 +50,11 @@
 		1C3688401AE52E9D00E2A083 /* event_icon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C36883F1AE52E9D00E2A083 /* event_icon.xcassets */; };
 		1C3688421AE52EB700E2A083 /* settings_icon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C3688411AE52EB700E2A083 /* settings_icon.xcassets */; };
 		1C38A0401B56832A00548D59 /* GPXCreator-2014-12-23 01:39:14 +0000.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 1C38A03F1B56832A00548D59 /* GPXCreator-2014-12-23 01:39:14 +0000.gpx */; };
-		1C3A6BA51B50CA1E002D1365 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C4886391B36F70E00A3164F /* Parse.framework */; };
 		1C3A6BA61B50CA7A002D1365 /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C4886871B37024C00A3164F /* libcocos2d iOS.a */; };
 		1C3A6BAD1B50CEE9002D1365 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C3A6BAC1B50CEE9002D1365 /* Security.framework */; };
 		1C3A6BB31B50CF22002D1365 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C3A6BB21B50CF22002D1365 /* OpenGLES.framework */; };
 		1C3A6BB71B50CFAB002D1365 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C3A6BB61B50CFAB002D1365 /* CoreLocation.framework */; };
 		1C3A6BB91B50D049002D1365 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C3A6BB81B50D049002D1365 /* libz.tbd */; };
-		1C3A6BBB1B50D05B002D1365 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C3A6BBA1B50D05A002D1365 /* libsqlite3.tbd */; };
 		1C3A6BBD1B50D066002D1365 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C3A6BBC1B50D066002D1365 /* Social.framework */; };
 		1C3A6BBF1B50D074002D1365 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C3A6BBE1B50D074002D1365 /* UIKit.framework */; };
 		1C3A6BC11B50D095002D1365 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C3A6BC01B50D094002D1365 /* SystemConfiguration.framework */; };
@@ -114,6 +112,11 @@
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
 		D56144EC1B5E173300AD0246 /* DetailMapInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D56144EB1B5E173300AD0246 /* DetailMapInformationViewController.m */; };
+		D580CB1E1B633A5900A7AF47 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D580CB1D1B633A5900A7AF47 /* libsqlite3.0.tbd */; };
+		D580CB231B64FCE600A7AF47 /* NYTransitionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D580CB201B64FCE500A7AF47 /* NYTransitionManager.m */; };
+		D580CB241B64FCE600A7AF47 /* UIViewController+NYBackTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = D580CB221B64FCE500A7AF47 /* UIViewController+NYBackTransition.m */; };
+		D59F1FD01B61D1440066CB26 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D59F1FCF1B61D1440066CB26 /* Parse.framework */; };
+		D5DFC2BD1B61D7F8007AC2A6 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5DFC2BC1B61D7F8007AC2A6 /* MessageUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -231,7 +234,6 @@
 		1C46619D1A8B98E30025B3D1 /* UIPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceholderTextView.m; sourceTree = "<group>"; };
 		1C4661A21A8E3FC80025B3D1 /* EventButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventButton.m; sourceTree = "<group>"; };
 		1C4661A31A8E3FC80025B3D1 /* EventButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventButton.h; sourceTree = "<group>"; };
-		1C4886391B36F70E00A3164F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../../../Downloads/parse-library-1.7.2/Parse.framework"; sourceTree = "<group>"; };
 		1C48867F1B37024900A3164F /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		1C6370DF1B52A8FD00E35E11 /* NavigationBarWithSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationBarWithSegmentedControl.h; sourceTree = "<group>"; };
 		1C6370E01B52A8FD00E35E11 /* NavigationBarWithSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationBarWithSegmentedControl.m; sourceTree = "<group>"; };
@@ -285,6 +287,13 @@
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D56144EA1B5E173300AD0246 /* DetailMapInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailMapInformationViewController.h; sourceTree = "<group>"; };
 		D56144EB1B5E173300AD0246 /* DetailMapInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailMapInformationViewController.m; sourceTree = "<group>"; };
+		D580CB1D1B633A5900A7AF47 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/usr/lib/libsqlite3.0.tbd; sourceTree = DEVELOPER_DIR; };
+		D580CB1F1B64FCE500A7AF47 /* NYTransitionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTransitionManager.h; sourceTree = "<group>"; };
+		D580CB201B64FCE500A7AF47 /* NYTransitionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYTransitionManager.m; sourceTree = "<group>"; };
+		D580CB211B64FCE500A7AF47 /* UIViewController+NYBackTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NYBackTransition.h"; sourceTree = "<group>"; };
+		D580CB221B64FCE500A7AF47 /* UIViewController+NYBackTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NYBackTransition.m"; sourceTree = "<group>"; };
+		D59F1FCF1B61D1440066CB26 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "parse-library-1.7.2/Parse.framework"; sourceTree = "<group>"; };
+		D5DFC2BC1B61D7F8007AC2A6 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/MessageUI.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,18 +301,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D580CB1E1B633A5900A7AF47 /* libsqlite3.0.tbd in Frameworks */,
+				D5DFC2BD1B61D7F8007AC2A6 /* MessageUI.framework in Frameworks */,
+				D59F1FD01B61D1440066CB26 /* Parse.framework in Frameworks */,
 				1C3A6BC71B50D1D7002D1365 /* CoreMotion.framework in Frameworks */,
 				1C3A6BC31B50D0AF002D1365 /* MobileCoreServices.framework in Frameworks */,
 				1C3A6BC11B50D095002D1365 /* SystemConfiguration.framework in Frameworks */,
 				1C3A6BBF1B50D074002D1365 /* UIKit.framework in Frameworks */,
 				1C3A6BBD1B50D066002D1365 /* Social.framework in Frameworks */,
-				1C3A6BBB1B50D05B002D1365 /* libsqlite3.tbd in Frameworks */,
 				1C3A6BB91B50D049002D1365 /* libz.tbd in Frameworks */,
 				1C3A6BB71B50CFAB002D1365 /* CoreLocation.framework in Frameworks */,
 				1C3A6BB31B50CF22002D1365 /* OpenGLES.framework in Frameworks */,
 				1C3A6BAD1B50CEE9002D1365 /* Security.framework in Frameworks */,
 				1C3A6BA61B50CA7A002D1365 /* libcocos2d iOS.a in Frameworks */,
-				1C3A6BA51B50CA1E002D1365 /* Parse.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				1CFA7B5E1AF8389F00D2BFF9 /* Bolts.framework in Frameworks */,
 				BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */,
@@ -477,6 +487,9 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D580CB1D1B633A5900A7AF47 /* libsqlite3.0.tbd */,
+				D5DFC2BC1B61D7F8007AC2A6 /* MessageUI.framework */,
+				D59F1FCF1B61D1440066CB26 /* Parse.framework */,
 				1C3A6BC61B50D1D7002D1365 /* CoreMotion.framework */,
 				1C3A6BC41B50D117002D1365 /* Foundation.framework */,
 				1C3A6BC21B50D0AE002D1365 /* MobileCoreServices.framework */,
@@ -492,7 +505,6 @@
 				1C3A6BAE1B50CEF6002D1365 /* Accelerate.framework */,
 				1C3A6BAC1B50CEE9002D1365 /* Security.framework */,
 				1C3A6BAA1B50CEC9002D1365 /* libz.1.1.3.tbd */,
-				1C4886391B36F70E00A3164F /* Parse.framework */,
 				1CFA7B5D1AF8389F00D2BFF9 /* Bolts.framework */,
 				1CFA7B611AF838B400D2BFF9 /* Parse.framework */,
 				1C9E189C1A7140F700DC4A37 /* Security.framework */,
@@ -558,6 +570,10 @@
 				1C46619D1A8B98E30025B3D1 /* UIPlaceholderTextView.m */,
 				1C6370DF1B52A8FD00E35E11 /* NavigationBarWithSegmentedControl.h */,
 				1C6370E01B52A8FD00E35E11 /* NavigationBarWithSegmentedControl.m */,
+				D580CB1F1B64FCE500A7AF47 /* NYTransitionManager.h */,
+				D580CB201B64FCE500A7AF47 /* NYTransitionManager.m */,
+				D580CB211B64FCE500A7AF47 /* UIViewController+NYBackTransition.h */,
+				D580CB221B64FCE500A7AF47 /* UIViewController+NYBackTransition.m */,
 				1CA3F4E41A57A62B00D26299 /* Supporting Files */,
 			);
 			name = Classes;
@@ -642,6 +658,9 @@
 					1D6058900D05DD3D006BFB54 = {
 						DevelopmentTeam = T3PN5G995F;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.InAppPurchase = {
 								enabled = 0;
 							};
@@ -773,12 +792,14 @@
 				1C4661921A8B97520025B3D1 /* DetailEventTableViewController.m in Sources */,
 				1CFA7B861B08343100D2BFF9 /* MapNative.mm in Sources */,
 				1C7E34361AE8FE5F00257C1E /* SettingsViewController.m in Sources */,
+				D580CB231B64FCE600A7AF47 /* NYTransitionManager.m in Sources */,
 				1CCCD2591B58AC6D0010E3F6 /* MapInformationContainerVisualEffectViewController.m in Sources */,
 				1C7E34331AE8FC9600257C1E /* InformationViewController.m in Sources */,
 				1C172E191B3D8457005237C0 /* MapInformationViewController.mm in Sources */,
 				D56144EC1B5E173300AD0246 /* DetailMapInformationViewController.m in Sources */,
 				1C6370E11B52A8FD00E35E11 /* NavigationBarWithSegmentedControl.m in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				D580CB241B64FCE600A7AF47 /* UIViewController+NYBackTransition.m in Sources */,
 				1C4661951A8B97B40025B3D1 /* EventTitleTableViewCell.m in Sources */,
 				1C4661831A8B96640025B3D1 /* PlanViewController.m in Sources */,
 				1C4661A41A8E3FC80025B3D1 /* EventButton.m in Sources */,
@@ -832,6 +853,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -855,7 +877,7 @@
 					"$(SRCROOT)/../cocos2d/cocos/platform/ios/Simulation",
 				);
 				INFOPLIST_FILE = ios/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = innew.ios.Navinival;
 				PRODUCT_NAME = "Navinival iOS";
@@ -877,6 +899,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -898,7 +921,7 @@
 					"$(SRCROOT)/../cocos2d/cocos/platform/ios/Simulation",
 				);
 				INFOPLIST_FILE = ios/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = innew.ios.Navinival;
 				PRODUCT_NAME = "Navinival iOS";

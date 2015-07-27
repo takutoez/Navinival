@@ -76,6 +76,7 @@
                                     [((MapInformationContainerVisualEffectViewController *)self.parentViewController.parentViewController) appearStatus:@"情報がありません"];
                                 }
                                 [self.tableView reloadData];
+                                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                             }
                         }] resume];
 }
@@ -102,6 +103,7 @@
                                     [((MapInformationContainerVisualEffectViewController *)self.parentViewController.parentViewController) appearStatus:@"情報がありません"];
                                 }
                                 [self.tableView reloadData];
+                                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                             }
                         }] resume];
     

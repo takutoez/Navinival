@@ -90,7 +90,7 @@ bool HelloWorld::init()
     auto forward = MoveBy::create(5.0f, Vec3(0, 0, r));
     auto left = MoveBy::create(5.0f, Vec3(+r , 0, 0));
     
-    auto sequence = Sequence::create(forward, NULL);
+    auto sequence = Sequence::create(back, right, forward, left, NULL);
     
     pinSprite->runAction(RepeatForever::create(sequence));
     

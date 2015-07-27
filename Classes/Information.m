@@ -10,10 +10,11 @@
 
 @implementation Information
 
-+(id)title:(NSString *)_title time:(NSString *)_time content:(NSString *)_content image:(NSString *)_image good:(NSString *)_good
++(id)title:(NSString *)_title map:(NSString*)_map time:(NSString *)_time content:(NSString *)_content image:(NSString *)_image good:(NSString *)_good
 {
     Information *info = [[self alloc] init];
     [info setTitle:_title];
+    [info setMap:_map];
     [info setTime:_time];
     [info setContent:_content];
     [info setImage:_image];

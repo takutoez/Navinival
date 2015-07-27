@@ -67,6 +67,7 @@
                                     }
                                 }
                             }
+                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                         }] resume];
     
 }

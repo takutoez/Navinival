@@ -20,6 +20,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *detailTitle;
 @property (weak, nonatomic) IBOutlet UIImageView *detailImage;
+@property (weak, nonatomic) IBOutlet UILabel *detailMeta;
 @property (weak, nonatomic) IBOutlet UILabel *detailContents;
 
 @end

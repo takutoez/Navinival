@@ -27,11 +27,6 @@
     [self getInformationData];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     return [_array count];
@@ -43,46 +38,50 @@
     
     Information *info = [_array objectAtIndex:indexPath.row];
     [[cell textLabel] setText:[info title]];
-    [[cell detailTextLabel] setText:[NSString stringWithFormat:@"%@", [info time]]];
+    [[cell detailTextLabel] setText:[NSString stringWithFormat:@"%@ %@", [info time], [info map]]];
     
     return cell;
 }
 
 - (void)getInformationData {
+    
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
     config.requestCachePolicy = NSURLRequestReloadIgnoringCacheData;
     NSURLSession *delegateFreeSession = [NSURLSession sessionWithConfiguration: config delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
-    [[delegateFreeSession dataTaskWithURL: [NSURL URLWithString:[NSString stringWithFormat:@"%@/app/gakuin/information/", BASE_URL]]
-                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    
+    _array = [NSMutableArray array];
+        
+    [[delegateFreeSession dataTaskWithURL: [NSURL URLWithString:[NSString stringWithFormat:@"%@/app/gakuin/push/", BASE_URL]] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                             if (error != nil){
                                 NSLog(@"Got response %@ with error %@.\n", response, error);
                             }else{
                                 NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-                                _array = [NSMutableArray array];
-                                for (NSDictionary *jsonDictionary in jsonArray)
-                                {
-                                    [_array addObject:[Information title:[jsonDictionary objectForKey:@"title"] time:[jsonDictionary objectForKey:@"time"] content:[jsonDictionary objectForKey:@"content"] image:[NSString stringWithFormat:@"%@%@", BASE_URL, [jsonDictionary objectForKey:@"image"]] good:[jsonDictionary objectForKey:@"good"]]];
+                                for (NSDictionary *jsonDictionary in jsonArray) {
+                                    [_array addObject:[Information title:[jsonDictionary objectForKey:@"title"] map:[jsonDictionary objectForKey:@"map"] time:[jsonDictionary objectForKey:@"time"] content:[jsonDictionary objectForKey:@"content"] image:[NSString stringWithFormat:@"%@%@", BASE_URL, [jsonDictionary objectForKey:@"image"]] good:nil]];
                                 }
-                                [[self tableView] reloadData];
+
+                                NSLog(@"%@", _array);
+                                    
+                                [self.tableView reloadData];
+                                
+                                [self.refreshControl endRefreshing];
+                                
                                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
                                     [self getImageData];
                                 });
                             }
                         }] resume];
-    [self.refreshControl endRefreshing];
 }
 
 -(void)getImageData {
     _imageArray = [NSMutableArray array];
-    for (Information *info in _array){
-        [_imageArray addObject:[UIImage imageWithData:[NSData dataWithContentsOfURL: [NSURL URLWithString: info.image]]]];
-    }
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-}
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath: (NSIndexPath*) indexPath{
-    [self performSegueWithIdentifier:@"detail" sender:self];
+    [_array enumerateObjectsUsingBlock:^(Information *info, NSUInteger idx, BOOL *stop) {
+        [_imageArray addObject:[UIImage imageWithData:[NSData dataWithContentsOfURL: [NSURL URLWithString: info.image]]]];
+    }];
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -99,6 +98,11 @@
 
 - (void)refreshControlStateChanged:(id)sender{
     [self getInformationData];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 @end
