@@ -111,10 +111,16 @@
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
+		D518EB041B6CB02C00362B24 /* gakuin.gpx in Resources */ = {isa = PBXBuildFile; fileRef = D518EB031B6CB02C00362B24 /* gakuin.gpx */; };
+		D527BD981B66F8850079EF77 /* SendInformationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D527BD971B66F8850079EF77 /* SendInformationTableViewController.m */; };
+		D54425DC1B6652B700A03B79 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D54425DB1B6652B700A03B79 /* logo@2x.png */; };
 		D56144EC1B5E173300AD0246 /* DetailMapInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D56144EB1B5E173300AD0246 /* DetailMapInformationViewController.m */; };
+		D5657EF41B677DEF00D36440 /* SearchResultTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5657EF31B677DEF00D36440 /* SearchResultTableViewController.m */; };
+		D56602F51B6CEC8000E44DB1 /* gakuin2.gpx in Resources */ = {isa = PBXBuildFile; fileRef = D56602F41B6CEC8000E44DB1 /* gakuin2.gpx */; };
+		D56602F71B6CF26B00E44DB1 /* gakuin3.gpx in Resources */ = {isa = PBXBuildFile; fileRef = D56602F61B6CF26B00E44DB1 /* gakuin3.gpx */; };
+		D574EB891B6764820052A87F /* PlaceSearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D574EB881B6764820052A87F /* PlaceSearchTableViewController.m */; };
 		D580CB1E1B633A5900A7AF47 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D580CB1D1B633A5900A7AF47 /* libsqlite3.0.tbd */; };
-		D580CB231B64FCE600A7AF47 /* NYTransitionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D580CB201B64FCE500A7AF47 /* NYTransitionManager.m */; };
-		D580CB241B64FCE600A7AF47 /* UIViewController+NYBackTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = D580CB221B64FCE500A7AF47 /* UIViewController+NYBackTransition.m */; };
+		D580CB281B661D3D00A7AF47 /* SendMapInformationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D580CB271B661D3D00A7AF47 /* SendMapInformationTableViewController.m */; };
 		D59F1FD01B61D1440066CB26 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D59F1FCF1B61D1440066CB26 /* Parse.framework */; };
 		D5DFC2BD1B61D7F8007AC2A6 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5DFC2BC1B61D7F8007AC2A6 /* MessageUI.framework */; };
 /* End PBXBuildFile section */
@@ -285,13 +291,21 @@
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D518EB031B6CB02C00362B24 /* gakuin.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gakuin.gpx; sourceTree = "<group>"; };
+		D527BD961B66F8850079EF77 /* SendInformationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendInformationTableViewController.h; sourceTree = "<group>"; };
+		D527BD971B66F8850079EF77 /* SendInformationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendInformationTableViewController.m; sourceTree = "<group>"; };
+		D54425DB1B6652B700A03B79 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		D56144EA1B5E173300AD0246 /* DetailMapInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailMapInformationViewController.h; sourceTree = "<group>"; };
 		D56144EB1B5E173300AD0246 /* DetailMapInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailMapInformationViewController.m; sourceTree = "<group>"; };
+		D5657EF21B677DEF00D36440 /* SearchResultTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultTableViewController.h; sourceTree = "<group>"; };
+		D5657EF31B677DEF00D36440 /* SearchResultTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultTableViewController.m; sourceTree = "<group>"; };
+		D56602F41B6CEC8000E44DB1 /* gakuin2.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gakuin2.gpx; sourceTree = "<group>"; };
+		D56602F61B6CF26B00E44DB1 /* gakuin3.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = gakuin3.gpx; sourceTree = "<group>"; };
+		D574EB871B6764820052A87F /* PlaceSearchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceSearchTableViewController.h; sourceTree = "<group>"; };
+		D574EB881B6764820052A87F /* PlaceSearchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceSearchTableViewController.m; sourceTree = "<group>"; };
 		D580CB1D1B633A5900A7AF47 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/usr/lib/libsqlite3.0.tbd; sourceTree = DEVELOPER_DIR; };
-		D580CB1F1B64FCE500A7AF47 /* NYTransitionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYTransitionManager.h; sourceTree = "<group>"; };
-		D580CB201B64FCE500A7AF47 /* NYTransitionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYTransitionManager.m; sourceTree = "<group>"; };
-		D580CB211B64FCE500A7AF47 /* UIViewController+NYBackTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NYBackTransition.h"; sourceTree = "<group>"; };
-		D580CB221B64FCE500A7AF47 /* UIViewController+NYBackTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NYBackTransition.m"; sourceTree = "<group>"; };
+		D580CB261B661D3D00A7AF47 /* SendMapInformationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendMapInformationTableViewController.h; sourceTree = "<group>"; };
+		D580CB271B661D3D00A7AF47 /* SendMapInformationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendMapInformationTableViewController.m; sourceTree = "<group>"; };
 		D59F1FCF1B61D1440066CB26 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "parse-library-1.7.2/Parse.framework"; sourceTree = "<group>"; };
 		D5DFC2BC1B61D7F8007AC2A6 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/MessageUI.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -301,6 +315,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C3A6BB71B50CFAB002D1365 /* CoreLocation.framework in Frameworks */,
 				D580CB1E1B633A5900A7AF47 /* libsqlite3.0.tbd in Frameworks */,
 				D5DFC2BD1B61D7F8007AC2A6 /* MessageUI.framework in Frameworks */,
 				D59F1FD01B61D1440066CB26 /* Parse.framework in Frameworks */,
@@ -310,7 +325,6 @@
 				1C3A6BBF1B50D074002D1365 /* UIKit.framework in Frameworks */,
 				1C3A6BBD1B50D066002D1365 /* Social.framework in Frameworks */,
 				1C3A6BB91B50D049002D1365 /* libz.tbd in Frameworks */,
-				1C3A6BB71B50CFAB002D1365 /* CoreLocation.framework in Frameworks */,
 				1C3A6BB31B50CF22002D1365 /* OpenGLES.framework in Frameworks */,
 				1C3A6BAD1B50CEE9002D1365 /* Security.framework in Frameworks */,
 				1C3A6BA61B50CA7A002D1365 /* libcocos2d iOS.a in Frameworks */,
@@ -456,6 +470,7 @@
 				1C7E341D1AE6897A00257C1E /* iTunesArtwork@2x.png */,
 				1C6370E31B52B9B200E35E11 /* good@2x.png */,
 				1C12915F1B3C2050008A4EC4 /* good@3x.png */,
+				D54425DB1B6652B700A03B79 /* logo@2x.png */,
 			);
 			path = icon;
 			sourceTree = "<group>";
@@ -472,6 +487,9 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				D518EB031B6CB02C00362B24 /* gakuin.gpx */,
+				D56602F41B6CEC8000E44DB1 /* gakuin2.gpx */,
+				D56602F61B6CF26B00E44DB1 /* gakuin3.gpx */,
 				1C38A03F1B56832A00548D59 /* GPXCreator-2014-12-23 01:39:14 +0000.gpx */,
 				1C48867F1B37024900A3164F /* cocos2d_libs.xcodeproj */,
 				46880B8319C43A87006E1F66 /* Classes */,
@@ -548,6 +566,14 @@
 				1C437E361B35997E00F9BFCD /* RankingViewController.m */,
 				1C7E34341AE8FE5F00257C1E /* SettingsViewController.h */,
 				1C7E34351AE8FE5F00257C1E /* SettingsViewController.m */,
+				D580CB261B661D3D00A7AF47 /* SendMapInformationTableViewController.h */,
+				D580CB271B661D3D00A7AF47 /* SendMapInformationTableViewController.m */,
+				D527BD961B66F8850079EF77 /* SendInformationTableViewController.h */,
+				D527BD971B66F8850079EF77 /* SendInformationTableViewController.m */,
+				D574EB871B6764820052A87F /* PlaceSearchTableViewController.h */,
+				D574EB881B6764820052A87F /* PlaceSearchTableViewController.m */,
+				D5657EF21B677DEF00D36440 /* SearchResultTableViewController.h */,
+				D5657EF31B677DEF00D36440 /* SearchResultTableViewController.m */,
 				1C4661841A8B96890025B3D1 /* Information.h */,
 				1C4661851A8B96890025B3D1 /* Information.m */,
 				1C4661871A8B96D30025B3D1 /* FirstDayTableViewController.h */,
@@ -570,10 +596,6 @@
 				1C46619D1A8B98E30025B3D1 /* UIPlaceholderTextView.m */,
 				1C6370DF1B52A8FD00E35E11 /* NavigationBarWithSegmentedControl.h */,
 				1C6370E01B52A8FD00E35E11 /* NavigationBarWithSegmentedControl.m */,
-				D580CB1F1B64FCE500A7AF47 /* NYTransitionManager.h */,
-				D580CB201B64FCE500A7AF47 /* NYTransitionManager.m */,
-				D580CB211B64FCE500A7AF47 /* UIViewController+NYBackTransition.h */,
-				D580CB221B64FCE500A7AF47 /* UIViewController+NYBackTransition.m */,
 				1CA3F4E41A57A62B00D26299 /* Supporting Files */,
 			);
 			name = Classes;
@@ -756,9 +778,13 @@
 				1C25F1F51B587DB700505141 /* story2 transparent.png in Resources */,
 				1C36882A1AE52D5500E2A083 /* pin.png in Resources */,
 				1C3688401AE52E9D00E2A083 /* event_icon.xcassets in Resources */,
+				D56602F71B6CF26B00E44DB1 /* gakuin3.gpx in Resources */,
 				1C3688291AE52D5500E2A083 /* pin.obj in Resources */,
+				D56602F51B6CEC8000E44DB1 /* gakuin2.gpx in Resources */,
 				1C2DFAEE1B3C43EB00E20507 /* sky_right.JPG in Resources */,
 				1C3688311AE52D5500E2A083 /* information_icon@2x.png in Resources */,
+				D518EB041B6CB02C00362B24 /* gakuin.gpx in Resources */,
+				D54425DC1B6652B700A03B79 /* logo@2x.png in Resources */,
 				1C7E34301AE68BD300257C1E /* Images.xcassets in Resources */,
 				1C36881F1AE52D5500E2A083 /* story2 transparent.png in Resources */,
 				1C7E34211AE6897A00257C1E /* icon-40@2x.png in Resources */,
@@ -789,17 +815,19 @@
 			files = (
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				1C46619E1A8B98E30025B3D1 /* UIPlaceholderTextView.m in Sources */,
+				D527BD981B66F8850079EF77 /* SendInformationTableViewController.m in Sources */,
 				1C4661921A8B97520025B3D1 /* DetailEventTableViewController.m in Sources */,
+				D580CB281B661D3D00A7AF47 /* SendMapInformationTableViewController.m in Sources */,
 				1CFA7B861B08343100D2BFF9 /* MapNative.mm in Sources */,
+				D574EB891B6764820052A87F /* PlaceSearchTableViewController.m in Sources */,
 				1C7E34361AE8FE5F00257C1E /* SettingsViewController.m in Sources */,
-				D580CB231B64FCE600A7AF47 /* NYTransitionManager.m in Sources */,
 				1CCCD2591B58AC6D0010E3F6 /* MapInformationContainerVisualEffectViewController.m in Sources */,
 				1C7E34331AE8FC9600257C1E /* InformationViewController.m in Sources */,
+				D5657EF41B677DEF00D36440 /* SearchResultTableViewController.m in Sources */,
 				1C172E191B3D8457005237C0 /* MapInformationViewController.mm in Sources */,
 				D56144EC1B5E173300AD0246 /* DetailMapInformationViewController.m in Sources */,
 				1C6370E11B52A8FD00E35E11 /* NavigationBarWithSegmentedControl.m in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
-				D580CB241B64FCE600A7AF47 /* UIViewController+NYBackTransition.m in Sources */,
 				1C4661951A8B97B40025B3D1 /* EventTitleTableViewCell.m in Sources */,
 				1C4661831A8B96640025B3D1 /* PlanViewController.m in Sources */,
 				1C4661A41A8E3FC80025B3D1 /* EventButton.m in Sources */,

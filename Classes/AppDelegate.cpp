@@ -51,6 +51,10 @@ void AppDelegate::onSegmentedControlChanged(int story){
     helloWorld->getInstance()->onSegmentedControlChanged(story);
 }
 
+void AppDelegate::onLocationChanged(float latitude, float longitude){
+    helloWorld->getInstance()->onLocationChanged(latitude, longitude);
+}
+
 // This function will be called when the app is inactive. When comes a phone call,it's be invoked too
 void AppDelegate::applicationDidEnterBackground() {
     Director::getInstance()->stopAnimation();

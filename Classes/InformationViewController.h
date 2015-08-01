@@ -15,5 +15,6 @@
 @property (strong,nonatomic) NSMutableArray *imageArray;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sendButton;
+- (IBAction)send:(id)sender;
 
 @end

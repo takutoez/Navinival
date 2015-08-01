@@ -7,6 +7,7 @@
 //
 
 #import "DetailMapInformationViewController.h"
+#import "MapInformationContainerVisualEffectViewController.h"
 
 @interface DetailMapInformationViewController ()
 
@@ -25,6 +26,12 @@
     [_content sizeToFit];
     _good.text = [NSString stringWithFormat:@"%@%@",  _goodString, @"Goods"];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [((MapInformationContainerVisualEffectViewController *)self.parentViewController.parentViewController) changeToEditWithInformationNumber:_informationNumber title:_titleString content:_contentString];
 }
 
 - (void)viewDidLayoutSubviews {

@@ -70,6 +70,8 @@ bool HelloWorld::init()
     
     mapPosition = Vec2(2338, 2856);
     CCLOG("%f", 0.15f * tan(M_PI/4 - atan2(0.10f,0.15f)));
+    pinX = 0;
+    pinY = 0;
     story = 0;
     
     camera = Camera::createPerspective(90, (GLfloat)visibleSize.width/visibleSize.height, 0.01, 1000);
@@ -83,7 +85,7 @@ bool HelloWorld::init()
     auto light = DirectionLight::create(Vec3(-0.0001f, -0.0001f, 0.0f), Color3B::WHITE);
     //addChild (light);
     
-    auto r = 0.1f;
+    auto r = 1.0f;
     
     auto back = MoveBy::create(5.0f, Vec3(0, 0, -r));
     auto right = MoveBy::create(5.0f, Vec3(-r, 0 , 0));
@@ -92,7 +94,7 @@ bool HelloWorld::init()
     
     auto sequence = Sequence::create(back, right, forward, left, NULL);
     
-    pinSprite->runAction(RepeatForever::create(sequence));
+    //pinSprite->runAction(RepeatForever::create(sequence));
     
     this->runAction(Follow::create(pinSprite));
     
@@ -129,12 +131,11 @@ void HelloWorld::onTouchEnded(Touch *touch, Event *event){
         Point screenPoint = Vec2(touch->getLocationInView().x, touch->getLocationInView().y);
         Point point = HelloWorld::transformPoint(screenPoint);
         
-        MapNative::mapData(round(point.x), round(point.y), 0);//後で0, つまり階のシステムを構築する
+        MapNative::mapData(round(point.x), round(point.y), story);//後で0, つまり階のシステムを構築する
     }
 }
 
-Point HelloWorld::transformPoint(Point point)
-{
+Point HelloWorld::transformPoint(Point point){
     Vec3 start(point.x, point.y, 0.0f), end(point.x, point.y, 1.0f);
     
     auto size = Director::getInstance()->getWinSize();
@@ -166,4 +167,21 @@ void HelloWorld::onSegmentedControlChanged(int changedStory){
     story2Sprite->runAction(EaseInOut::create(MoveBy::create(1.0, Vec3(0, (story - changedStory)*0.15, 0)), 2));
     pinSprite->runAction(EaseInOut::create(MoveBy::create(1.0, Vec3(0, (story - changedStory)*0.15, 0)), 2));
     story = changedStory;
+}
+
+void HelloWorld::onLocationChanged(float latitude, float longitude){
+    float angle = 0.24993114888558798;
+    float originX = 139.59247926572826;
+    float originY = 35.731768811376405;
+    float rotatedX = (longitude - originX)*965328.057521775226;
+    float rotatedY = (latitude - originY)*1193738.44933359347103;
+    
+    float gapX = rotatedX*cos(angle)-rotatedY*sin(angle);
+    float gapY = -(rotatedX*sin(angle)+rotatedY*cos(angle));
+    
+    float x = gapX / 2024;
+    float y = gapY / 2024;
+    pinSprite->runAction(MoveBy::create(1.0, Vec3(x-pinX, 0, y-pinY)));
+    pinX = x;
+    pinY = y;
 }

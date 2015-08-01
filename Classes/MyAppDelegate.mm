@@ -20,6 +20,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
     _baseUrl = @"http://126.217.92.188:8080";
     
     [Parse setApplicationId:@"ERYPrORJqGmfiaQN66gNPCyhX30i9ZtMnRMf2BeS"

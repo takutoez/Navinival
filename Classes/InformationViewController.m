@@ -27,6 +27,18 @@
     [self getInformationData];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if(![defaults boolForKey:@"IS_STUDENT"]) {
+        _sendButton.title = @"";
+        _sendButton.enabled = NO;
+    }else{
+        _sendButton.title = @"送信";
+        _sendButton.enabled = YES;
+    }
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     return [_array count];
@@ -100,9 +112,13 @@
     [self getInformationData];
 }
 
+- (IBAction)send:(id)sender {
+    UINavigationController *sendInformationTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"sendInformation"];
+    [self presentViewController:sendInformationTableViewController animated:YES completion:nil];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 @end

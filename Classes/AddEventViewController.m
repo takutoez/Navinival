@@ -10,7 +10,6 @@
 #import "FirstDayTableViewController.h"
 #import "SecondDayTableViewController.h"
 #import "PlanViewController.h"
-#import "UIViewController+NYBackTransition.h"
 
 @interface AddEventViewController (){
     
@@ -157,7 +156,7 @@
 }
 
 - (void)cancel:(id)sender {
-    [self dismissViewControllerWithBackTransitionCompletion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

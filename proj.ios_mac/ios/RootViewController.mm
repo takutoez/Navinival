@@ -75,9 +75,21 @@ static AppDelegate s_sharedApplication;
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
+    locationManager.distanceFilter = 2;
+    [locationManager startUpdatingLocation];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:1.0 green:0.196 blue:0.0 alpha:1.0];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationItem.titleView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]] autorelease];
+    
     NSArray *itemArray = [NSArray arrayWithObjects: @"1階", @"2階", @"3階", nil];
     segmentedControl = [[UISegmentedControl alloc] initWithItems:itemArray];
     segmentedControl.frame = CGRectMake(20, self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height - 34, self.view.frame.size.width - 40, 30);
+    segmentedControl.tintColor = [UIColor whiteColor];
     [segmentedControl addTarget:self action:@selector(onSegmentedControlChanged:) forControlEvents: UIControlEventValueChanged];
     segmentedControl.selectedSegmentIndex = 0;
     
@@ -97,7 +109,6 @@ static AppDelegate s_sharedApplication;
     [_hideButton setTitle:@"×" forState:UIControlStateNormal];
     [_hideButton.titleLabel setFont:[UIFont systemFontOfSize:30]];
     _hideButton.frame = CGRectMake(23, self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height + 20 + 3, 40, 40);
-    _hideButton.alpha = 0;
     [self.view addSubview:_hideButton];
 }
 
@@ -111,8 +122,31 @@ static AppDelegate s_sharedApplication;
     [segmentedControl removeFromSuperview];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    _hideButton.alpha = 0;
+}
+
 - (void)onSegmentedControlChanged:(id)sender {
     s_sharedApplication.onSegmentedControlChanged(segmentedControl.selectedSegmentIndex);
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    float latitude = newLocation.coordinate.latitude;
+    float longitude = newLocation.coordinate.longitude;
+    s_sharedApplication.onLocationChanged(latitude, longitude);
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    [locationManager stopUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    if (status == kCLAuthorizationStatusNotDetermined) {
+        [manager requestWhenInUseAuthorization];
+    }
 }
 
 - (void)showMapInformation:(NSString *)number {
@@ -138,7 +172,7 @@ static AppDelegate s_sharedApplication;
                          completion:nil];
     }
     
-    [((MapInformationContainerVisualEffectViewController *)self.childViewControllers[0]) changeTitleMapInformation];
+    [((MapInformationContainerVisualEffectViewController *)self.childViewControllers[0]) changeTitleMapInformationWithNumber:number];
     
     [((MapInformationViewController *)((MapInformationContainerVisualEffectViewController *)self.childViewControllers[0]).childViewControllers[0].childViewControllers[0]) loadDataWithNumber:number];
     

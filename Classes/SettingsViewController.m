@@ -7,7 +7,6 @@
 //
 
 #import "SettingsViewController.h"
-#import "UIViewController+NYBackTransition.h"
 
 @interface SettingsViewController ()
 
@@ -29,7 +28,7 @@
         
         [picker setToRecipients:[NSArray arrayWithObject:@"takutoez@fuji.waseda.jp"]];
         
-        [self presentViewControllerWithBackTransition:picker completion:nil];
+        [self presentViewController:picker animated:YES completion:nil];
     }
 
 }

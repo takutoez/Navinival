@@ -18,6 +18,7 @@ public:
     
     static HelloWorld *getInstance();
     void onSegmentedControlChanged(int story);
+    void onLocationChanged(float latitude, float longitude);
     
     cocos2d::Point transformPoint(cocos2d::Point point);
     
@@ -30,6 +31,8 @@ public:
     
     cocos2d::Vec2 onTouchBeganPoint;
     cocos2d::Vec2 mapPosition;
+    float pinX;
+    float pinY;
     int story;
     
     // implement the "static create()" method manually

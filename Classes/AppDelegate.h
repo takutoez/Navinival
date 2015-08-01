@@ -18,6 +18,7 @@ public:
     virtual void initGLContextAttrs();
     
     void onSegmentedControlChanged(int story);
+    void onLocationChanged(float latitude, float longitude);
 
     /**
     @brief    Implement Director and Scene init code here.

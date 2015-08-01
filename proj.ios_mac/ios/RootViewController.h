@@ -24,24 +24,17 @@
  ****************************************************************************/
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 #include "HelloWorldScene.h"
 #import "MapInformationContainerVisualEffectViewController.h"
 #import "MapInformationViewController.h"
 #import "Information.h"
 
-@protocol RootViewDelegate <NSObject>
-
-- (void)loadDataWithNumber:(NSString *)number;
-- (void)loadDataGoodList;
-
-@end
-
-@interface RootViewController : UIViewController {
+@interface RootViewController : UIViewController <CLLocationManagerDelegate> {
     UIWindow *window;
     UISegmentedControl *segmentedControl;
+    CLLocationManager *locationManager;
 }
-
-@property (strong, nonatomic) id<RootViewDelegate> delegate;
 
 @property (strong, nonatomic) UIView *mapInformationView;
 @property (strong, nonatomic) UIButton *hideButton;
