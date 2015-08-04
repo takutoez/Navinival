@@ -82,6 +82,39 @@ static AppDelegate s_sharedApplication;
     locationManager.distanceFilter = 2;
     [locationManager startUpdatingLocation];
     
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    config.requestCachePolicy = NSURLRequestReloadIgnoringCacheData;
+    NSURLSession *delegateFreeSession = [NSURLSession sessionWithConfiguration: config delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+    
+    [[delegateFreeSession dataTaskWithURL: [NSURL URLWithString:[NSString stringWithFormat:@"%@/app/gakuin/map/beacon/", BASE_URL]]
+                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                            if (error != nil){
+                                NSLog(@"Got response %@ with error %@.\n", response, error);
+                            }else{
+                                NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                                _beaconArray = [[NSMutableArray alloc] init];
+                                for (NSDictionary *jsonDictionary in jsonArray)
+                                {
+                                    [_beaconArray addObject:jsonDictionary];
+                                }
+                            }
+                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                            
+                            if ([CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]]) {
+                                // 生成したUUIDからNSUUIDを作成
+                                _proximityUUID = [[NSUUID alloc] initWithUUIDString:@"00000000-9c1d-1001-b000-001c4d389a24"];
+                                // CLBeaconRegionを作成
+                                _beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:_proximityUUID
+                                                                                   identifier:@"com.navinival.gakuin"];
+                                _beaconRegion.notifyOnEntry = YES;
+                                _beaconRegion.notifyOnExit = YES;
+                                _beaconRegion.notifyEntryStateOnDisplay = YES;
+                                // Beaconによる領域観測を開始
+                                [locationManager startMonitoringForRegion:_beaconRegion];
+                            }
+                        }] resume];
+    
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:1.0 green:0.196 blue:0.0 alpha:1.0];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationItem.titleView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]] autorelease];
@@ -110,6 +143,7 @@ static AppDelegate s_sharedApplication;
     [_hideButton.titleLabel setFont:[UIFont systemFontOfSize:30]];
     _hideButton.frame = CGRectMake(23, self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height + 20 + 3, 40, 40);
     [self.view addSubview:_hideButton];
+    _hideButton.alpha = 0;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -120,11 +154,6 @@ static AppDelegate s_sharedApplication;
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillAppear:animated];
     [segmentedControl removeFromSuperview];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    _hideButton.alpha = 0;
 }
 
 - (void)onSegmentedControlChanged:(id)sender {
@@ -147,6 +176,117 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status
     if (status == kCLAuthorizationStatusNotDetermined) {
         [manager requestWhenInUseAuthorization];
     }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region
+{
+    [locationManager requestStateForRegion:_beaconRegion];
+    [locationManager startRangingBeaconsInRegion:_beaconRegion];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
+{
+    if (beacons.count > 0) {
+        int majors[4];
+        int minors[4];
+        CLProximity proximities[4];
+        for(int i = 0; i < 4; i++){
+            if(beacons.count > i){
+                majors[i] = ((CLBeacon *)beacons[i]).major.intValue;
+                minors[i] = ((CLBeacon *)beacons[i]).minor.intValue;
+                proximities[i] = ((CLBeacon *)beacons[i]).proximity;
+            }else{
+                majors[i] = -1;
+                minors[i] = -1;
+                proximities[i] = CLProximityUnknown;
+            }
+        }
+        
+        if(proximities[0] == CLProximityImmediate) {
+            [self oneBeaconWithMajor:majors minor:minors];
+        }else if(proximities[0] == CLProximityNear && proximities[1] == CLProximityNear && proximities[2] == CLProximityNear && proximities[3] == CLProximityNear){
+            [self fourBeaconsWithMajor:majors minor:minors];
+        }else if(proximities[0] == CLProximityNear && proximities[1] == CLProximityNear && proximities[2] == CLProximityNear){
+            [self threeBeaconsWithMajor:majors minor:minors];
+        }else if(proximities[0] == CLProximityNear && proximities[1] == CLProximityNear){
+            [self twoBeaconsWithMajor:majors minor:minors];
+        }else if(proximities[0] == CLProximityNear){
+            [self oneBeaconWithMajor:majors minor:minors];
+        }else if(proximities[0] == CLProximityFar && proximities[1] == CLProximityFar && proximities[2] == CLProximityFar && proximities[3] == CLProximityFar){
+            [self fourBeaconsWithMajor:majors minor:minors];
+        }else if(proximities[0] == CLProximityFar && proximities[1] == CLProximityFar && proximities[2] == CLProximityFar){
+            [self threeBeaconsWithMajor:majors minor:minors];
+        }
+    }
+}
+
+- (void)oneBeaconWithMajor:(int *)majors minor:(int *)minors {
+    [_beaconArray enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
+        if ([[obj objectForKey:@"major"] intValue] == majors[0] && [[obj objectForKey:@"minor"] intValue] == minors[0]) {
+            s_sharedApplication.onLocationBasedBeaconChanged([[obj objectForKey:@"x"] floatValue], [[obj objectForKey:@"y"] floatValue], [[obj objectForKey:@"z"] floatValue]);
+            *stop = YES;
+        }
+    }];
+}
+
+- (void)twoBeaconsWithMajor:(int *)majors minor:(int *)minors {
+    __block NSDictionary *first;
+    __block NSDictionary *second;
+    [_beaconArray enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
+        if ([[obj objectForKey:@"major"] intValue] == majors[0] && [[obj objectForKey:@"minor"] intValue] == minors[0]) {
+            first = obj;
+        }else if ([[obj objectForKey:@"major"] intValue] == majors[1] && [[obj objectForKey:@"minor"] intValue] == minors[1]){
+            second = obj;
+            *stop = YES;
+        }
+    }];
+    float x = ([[first objectForKey:@"x"] floatValue] + [[second objectForKey:@"x"] floatValue])/2;
+    float y = ([[first objectForKey:@"y"] floatValue] + [[second objectForKey:@"y"] floatValue])/2;
+    float z = [[first objectForKey:@"z"] floatValue];
+    s_sharedApplication.onLocationBasedBeaconChanged(x, y, z);
+}
+
+- (void)threeBeaconsWithMajor:(int *)majors minor:(int *)minors {
+    __block NSDictionary *first;
+    __block NSDictionary *second;
+    __block NSDictionary *third;
+    [_beaconArray enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
+        if ([[obj objectForKey:@"major"] intValue] == majors[0] && [[obj objectForKey:@"minor"] intValue] == minors[0]) {
+            first = obj;
+        }else if ([[obj objectForKey:@"major"] intValue] == majors[1] && [[obj objectForKey:@"minor"] intValue] == minors[1]){
+            second = obj;
+        }else if ([[obj objectForKey:@"major"] intValue] == majors[2] && [[obj objectForKey:@"minor"] intValue] == minors[2]){
+            third = obj;
+            *stop = YES;
+        }
+    }];
+    float x = ([[first objectForKey:@"x"] floatValue] + [[second objectForKey:@"x"] floatValue] + [[third objectForKey:@"x"] floatValue])/3;
+    float y = ([[first objectForKey:@"y"] floatValue] + [[second objectForKey:@"y"] floatValue] + [[third objectForKey:@"x"] floatValue])/3;
+    float z = [[first objectForKey:@"z"] floatValue];
+    s_sharedApplication.onLocationBasedBeaconChanged(x, y, z);
+}
+
+- (void)fourBeaconsWithMajor:(int *)majors minor:(int *)minors {
+    __block NSDictionary *first;
+    __block NSDictionary *second;
+    __block NSDictionary *third;
+    __block NSDictionary *fourth;
+    [_beaconArray enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
+        if ([[obj objectForKey:@"major"] intValue] == majors[0] && [[obj objectForKey:@"minor"] intValue] == minors[0]) {
+            first = obj;
+        }else if ([[obj objectForKey:@"major"] intValue] == majors[1] && [[obj objectForKey:@"minor"] intValue] == minors[1]){
+            second = obj;
+        }else if ([[obj objectForKey:@"major"] intValue] == majors[2] && [[obj objectForKey:@"minor"] intValue] == minors[2]){
+            third = obj;
+        }else if ([[obj objectForKey:@"major"] intValue] == majors[3] && [[obj objectForKey:@"minor"] intValue] == minors[3]){
+            fourth = obj;
+            *stop = YES;
+        }
+    }];
+    float x = ([[first objectForKey:@"x"] floatValue] + [[second objectForKey:@"x"] floatValue] + [[third objectForKey:@"x"] floatValue] + [[fourth objectForKey:@"x"] floatValue])/4;
+    float y = ([[first objectForKey:@"y"] floatValue] + [[second objectForKey:@"y"] floatValue] + [[third objectForKey:@"x"] floatValue] + [[fourth objectForKey:@"x"] floatValue])/4;
+    float z = [[first objectForKey:@"z"] floatValue];
+    s_sharedApplication.onLocationBasedBeaconChanged(x, y, z);
 }
 
 - (void)showMapInformation:(NSString *)number {

@@ -27,7 +27,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    ((RootViewController *)self.parentViewController.parentViewController.parentViewController).hideButton.alpha = 1.0;
+    ((RootViewController *)self.parentViewController.parentViewController.parentViewController).hideButton.hidden = NO;
     [((MapInformationContainerVisualEffectViewController *)self.parentViewController.parentViewController) changeToSend];
 }
 
@@ -129,7 +129,7 @@
     destinationViewController.contentString = [[_informationArray objectAtIndex:indexPath.row] objectForKey:@"content"];
     destinationViewController.goodString = [[[_informationArray objectAtIndex:indexPath.row] objectForKey:@"good"] stringValue];
     
-    ((RootViewController *)self.parentViewController.parentViewController.parentViewController).hideButton.alpha = 0;
+    ((RootViewController *)self.parentViewController.parentViewController.parentViewController).hideButton.hidden = YES;
     
 }
 

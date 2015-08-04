@@ -54,8 +54,6 @@
                                     [_mapArray addObject:jsonDictionary];
                                 }
                             }
-                            
-                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                         }] resume];
     
     return YES;
@@ -108,7 +106,6 @@
                 }
             }];
     }
-    
 }
 
 - (void)mapDataX:(int)x withY:(int)y withFloor:(int)floor{

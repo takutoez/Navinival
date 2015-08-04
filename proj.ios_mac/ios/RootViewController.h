@@ -36,8 +36,18 @@
     CLLocationManager *locationManager;
 }
 
+@property (strong, nonatomic) NSMutableArray *beaconArray;
+@property (nonatomic) NSUUID *proximityUUID;
+@property (nonatomic) CLBeaconRegion *beaconRegion;
+
 @property (strong, nonatomic) UIView *mapInformationView;
 @property (strong, nonatomic) UIButton *hideButton;
+
+- (void)startBeacon:(NSMutableArray *)array;
+- (void)oneBeaconWithMajor:(int *)majors minor:(int *)minors;
+- (void)twoBeaconsWithMajor:(int *)majors minor:(int *)minors;
+- (void)threeBeaconsWithMajor:(int *)majors minor:(int *)minors;
+- (void)fourBeaconsWithMajor:(int *)majors minor:(int *)minors;
 - (void)showMapInformation:(NSString *)number;
 - (void)showGoodList;
 

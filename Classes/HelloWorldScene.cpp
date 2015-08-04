@@ -185,3 +185,7 @@ void HelloWorld::onLocationChanged(float latitude, float longitude){
     pinX = x;
     pinY = y;
 }
+
+void HelloWorld::onLocationBasedBeaconChanged(float x, float y, float z){
+    CCLOG("x:%f y:%f z:%f", x, y, z);
+}

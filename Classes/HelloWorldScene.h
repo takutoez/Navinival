@@ -19,6 +19,7 @@ public:
     static HelloWorld *getInstance();
     void onSegmentedControlChanged(int story);
     void onLocationChanged(float latitude, float longitude);
+    void onLocationBasedBeaconChanged(float x, float y, float z);
     
     cocos2d::Point transformPoint(cocos2d::Point point);
     
