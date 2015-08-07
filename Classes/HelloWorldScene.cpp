@@ -181,11 +181,17 @@ void HelloWorld::onLocationChanged(float latitude, float longitude){
     
     float x = gapX / 2024;
     float y = gapY / 2024;
-    pinSprite->runAction(MoveBy::create(1.0, Vec3(x-pinX, 0, y-pinY)));
+    pinSprite->runAction(MoveBy::create(0.2, Vec3(x-pinX, 0, y-pinY)));
     pinX = x;
     pinY = y;
 }
 
-void HelloWorld::onLocationBasedBeaconChanged(float x, float y, float z){
-    CCLOG("x:%f y:%f z:%f", x, y, z);
+void HelloWorld::onLocationBasedBeaconChanged(float pixelX, float pixelY, float pixelZ){
+    float x = pixelX / 2856 - 1.0;
+    float y = pixelY / 2556 - 1.0;
+    float z = pixelZ * 0.15;
+    pinSprite->runAction(MoveBy::create(0.2, Vec3(x-pinX, z-pinZ, y-pinY)));
+    pinX = x;
+    pinY = y;
+    pinZ = z;
 }

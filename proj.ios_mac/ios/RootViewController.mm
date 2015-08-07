@@ -187,6 +187,8 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 - (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
 {
     if (beacons.count > 0) {
+        [locationManager stopUpdatingLocation];
+        
         int majors[4];
         int minors[4];
         CLProximity proximities[4];
@@ -202,6 +204,8 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status
             }
         }
         
+        NSLog(@"proximity:%ld, %ld", (long)proximities[0], (long)proximities[1]);
+        
         if(proximities[0] == CLProximityImmediate) {
             [self oneBeaconWithMajor:majors minor:minors];
         }else if(proximities[0] == CLProximityNear && proximities[1] == CLProximityNear && proximities[2] == CLProximityNear && proximities[3] == CLProximityNear){
@@ -216,7 +220,11 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status
             [self fourBeaconsWithMajor:majors minor:minors];
         }else if(proximities[0] == CLProximityFar && proximities[1] == CLProximityFar && proximities[2] == CLProximityFar){
             [self threeBeaconsWithMajor:majors minor:minors];
+        }else{
+            [locationManager startUpdatingLocation];
         }
+    }else{
+        [locationManager startUpdatingLocation];
     }
 }
 
@@ -237,7 +245,6 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status
             first = obj;
         }else if ([[obj objectForKey:@"major"] intValue] == majors[1] && [[obj objectForKey:@"minor"] intValue] == minors[1]){
             second = obj;
-            *stop = YES;
         }
     }];
     float x = ([[first objectForKey:@"x"] floatValue] + [[second objectForKey:@"x"] floatValue])/2;
@@ -257,7 +264,6 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status
             second = obj;
         }else if ([[obj objectForKey:@"major"] intValue] == majors[2] && [[obj objectForKey:@"minor"] intValue] == minors[2]){
             third = obj;
-            *stop = YES;
         }
     }];
     float x = ([[first objectForKey:@"x"] floatValue] + [[second objectForKey:@"x"] floatValue] + [[third objectForKey:@"x"] floatValue])/3;
@@ -280,7 +286,6 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status
             third = obj;
         }else if ([[obj objectForKey:@"major"] intValue] == majors[3] && [[obj objectForKey:@"minor"] intValue] == minors[3]){
             fourth = obj;
-            *stop = YES;
         }
     }];
     float x = ([[first objectForKey:@"x"] floatValue] + [[second objectForKey:@"x"] floatValue] + [[third objectForKey:@"x"] floatValue] + [[fourth objectForKey:@"x"] floatValue])/4;
