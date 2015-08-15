@@ -38,7 +38,11 @@
     [super viewDidLayoutSubviews];
     
     [_scrollView layoutIfNeeded];
-    _contentsView.frame = CGRectMake(0, 0, _scrollView.frame.size.width, _content.frame.origin.y + _content.frame.size.height + 46);
+    if(_content.frame.origin.y + _content.frame.size.height + 46 > _scrollView.frame.size.height){
+        _contentsView.frame = CGRectMake(0, 0, _scrollView.frame.size.width, _content.frame.origin.y + _content.frame.size.height + 46);
+    }else{
+        _contentsView.frame = CGRectMake(0, 0, _scrollView.frame.size.width, _scrollView.frame.size.height + 1);
+    }
     _scrollView.contentSize = _contentsView.bounds.size;
 }
 

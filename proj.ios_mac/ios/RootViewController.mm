@@ -125,6 +125,8 @@ static AppDelegate s_sharedApplication;
     segmentedControl.tintColor = [UIColor whiteColor];
     [segmentedControl addTarget:self action:@selector(onSegmentedControlChanged:) forControlEvents: UIControlEventValueChanged];
     segmentedControl.selectedSegmentIndex = 0;
+    [segmentedControl setHidden:YES];
+    [[[UIApplication sharedApplication] keyWindow] addSubview:segmentedControl];
     
      MapInformationContainerVisualEffectViewController *mapInformationContaienrViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"mapInformationContainer"];
     _mapInformationView = mapInformationContaienrViewController.view;
@@ -144,16 +146,28 @@ static AppDelegate s_sharedApplication;
     _hideButton.frame = CGRectMake(23, self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height + 20 + 3, 40, 40);
     [self.view addSubview:_hideButton];
     _hideButton.alpha = 0;
+    
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    visualEffectView.frame = CGRectMake(0, self.navigationController.navigationBar.frame.size.height - [UIApplication sharedApplication].statusBarFrame.size.height + 40.1, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.tabBarController.tabBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height - 40.0);
+    [self.view addSubview:visualEffectView];
+    searchViewController = [[self storyboard] instantiateViewControllerWithIdentifier:@"mapSearch"];
+    searchViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.tabBarController.tabBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height - 40.0);
+    [visualEffectView addSubview:searchViewController.view];
+    [self addChildViewController:searchViewController];
+    [visualEffectView setAlpha:0.0];
+    [visualEffectView setHidden:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[[UIApplication sharedApplication] keyWindow] addSubview:segmentedControl];
+    [segmentedControl setHidden:NO];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [segmentedControl removeFromSuperview];
+    [segmentedControl setHidden:YES];
+    [visualEffectView setHidden:YES];
 }
 
 - (void)onSegmentedControlChanged:(id)sender {
@@ -430,5 +444,28 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 
 - (IBAction)goodListButton:(id)sender {
     [self showGoodList];
+}
+
+- (IBAction)searchButton:(id)sender {
+    if(visualEffectView.hidden){
+        [UIView animateWithDuration:0.5
+                              delay:0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^{
+                             [visualEffectView setHidden:NO];
+                             [visualEffectView setAlpha:1.0];
+                         }
+                         completion:nil];
+    }else{
+        [UIView animateWithDuration:0.5
+                              delay:0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^{
+                             [visualEffectView setAlpha:0.0];
+                         }
+                         completion:^(BOOL finished) {
+                             [visualEffectView setHidden:YES];
+                         }];
+    }
 }
 @end

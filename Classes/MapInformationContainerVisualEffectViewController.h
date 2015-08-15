@@ -17,6 +17,7 @@
 @property (strong, nonatomic)NSString *informationNumber;
 @property (strong, nonatomic)NSString *titleString;
 @property (strong, nonatomic)NSString *contentString;
+@property (weak, nonatomic) IBOutlet UIView *container;
 
 - (void)changeTitleMapInformationWithNumber:(NSString *)number;
 - (void)changeTitleGoodList;

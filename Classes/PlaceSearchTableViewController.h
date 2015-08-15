@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PlaceSearchTableViewController : UITableViewController <UISearchResultsUpdating, UISearchBarDelegate>
+@interface PlaceSearchTableViewController : UITableViewController <UISearchResultsUpdating, UISearchBarDelegate, UIScrollViewDelegate>
 
 @property (strong, nonatomic)NSMutableArray *mapArray;
 @property (nonatomic, strong) NSMutableArray *result;

@@ -29,10 +29,13 @@
 #import "MapInformationContainerVisualEffectViewController.h"
 #import "MapInformationViewController.h"
 #import "Information.h"
+#import "MapSearchTableViewController.h"
 
-@interface RootViewController : UIViewController <CLLocationManagerDelegate> {
+@interface RootViewController : UIViewController <CLLocationManagerDelegate, UITableViewDelegate> {
     UIWindow *window;
     UISegmentedControl *segmentedControl;
+    UIVisualEffectView *visualEffectView;
+    MapSearchTableViewController *searchViewController;
     CLLocationManager *locationManager;
 }
 
@@ -52,5 +55,6 @@
 - (void)showGoodList;
 
 - (IBAction)goodListButton:(id)sender;
+- (IBAction)searchButton:(id)sender;
 
 @end

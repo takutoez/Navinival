@@ -12,7 +12,7 @@
 #import "MapInformationContainerVisualEffectViewController.h"
 #import "DetailMapInformationViewController.h"
 
-@interface MapInformationViewController : UITableViewController
+@interface MapInformationViewController : UITableViewController <UINavigationControllerDelegate>
 
 @property (strong, nonatomic)NSMutableArray *informationArray;
 

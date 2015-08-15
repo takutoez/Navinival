@@ -74,6 +74,26 @@
 
 }
 
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    // アプリ起動中(フォアグラウンド)に通知が届いた場合
+    if(application.applicationState == UIApplicationStateActive) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:notification.alertTitle message:notification.alertBody preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* ok = [UIAlertAction
+                             actionWithTitle:@"OK"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                                 
+                             }];
+        [alert addAction:ok];
+        [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+    }
+    
+    // 通知領域から削除する
+    [[UIApplication sharedApplication] cancelLocalNotification:notification];
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -233,13 +253,12 @@
             [self mapInformation: point number:111 upperLeftX:3788.0 upperLeftY:2966.0 lowerLeftX:3822.0 lowerLeftY:3093.0 upperRightX:3918.0 upperRightY:2930.0 lowerRightX:3952.0 lowerRightY:3057.0];//1-D
             [self mapInformation: point number:112 upperLeftX:3823.0 upperLeftY:3094.0 lowerLeftX:3857.0 lowerLeftY:3220.0 upperRightX:3952.0 upperRightY:3057.0 lowerRightX:3985.0 lowerRightY:3183.0];//1-E
             [self mapInformation: point number:113 upperLeftX:3857.0 upperLeftY:3219.0 lowerLeftX:3888.0 lowerLeftY:3336.0 upperRightX:3986.0 upperRightY:3184.0 lowerRightX:4018.0 lowerRightY:3302.0];//1-F
-            [self mapInformation: point number:126 upperLeftX:2455.0 upperLeftY:2056.0 lowerLeftX:2455.0 lowerLeftY:2185.0 upperRightX:2562.0 upperRightY:2056.0 lowerRightX:2562.0 lowerRightY:2186.0];//トイレ１
-            [self mapInformation: point number:127 upperLeftX:2456.0 upperLeftY:2320.0 lowerLeftX:2456.0 lowerLeftY:2447.0 upperRightX:2562.0 upperRightY:2319.0 lowerRightX:2563.0 lowerRightY:2447.0];//トイレ２
-            [self mapInformation: point number:128 upperLeftX:2562.0 upperLeftY:2056.0 lowerLeftX:2563.0 lowerLeftY:2447.0 upperRightX:3146.0 upperRightY:2053.0 lowerRightX:3148.0 lowerRightY:2455.0];//講堂
-            [self mapInformation: point number:129 upperLeftX:3147.0 upperLeftY:2014.0 lowerLeftX:3147.0 lowerLeftY:2211.0 upperRightX:3267.0 upperRightY:2014.0 lowerRightX:3267.0 lowerRightY:3267.0];//音楽室
-            [self mapInformation: point number:130 upperLeftX:3149.0 upperLeftY:2213.0 lowerLeftX:3149.0 lowerLeftY:2278.0 upperRightX:3219.0 upperRightY:2213.0 lowerRightX:3219.0 lowerRightY:2277.0];//楽器倉庫1
-            [self mapInformation: point number:131 upperLeftX:3149.0 upperLeftY:2277.0 lowerLeftX:3149.0 lowerLeftY:2339.0 upperRightX:3219.0 upperRightY:2277.0 lowerRightX:3220.0 lowerRightY:2337.0];//楽器倉庫2
-            [self mapInformation: point number:132 upperLeftX:3219.0 upperLeftY:2213.0 lowerLeftX:3219.0 lowerLeftY:2336.0 upperRightX:3267.0 upperRightY:2213.0 lowerRightX:3268.0 lowerRightY:2337.0];//音楽準備室
+            [self mapInformation: point number:127 upperLeftX:2455.0 upperLeftY:2056.0 lowerLeftX:2455.0 lowerLeftY:2185.0 upperRightX:2562.0 upperRightY:2056.0 lowerRightX:2562.0 lowerRightY:2186.0];//トイレ１
+            [self mapInformation: point number:128 upperLeftX:2456.0 upperLeftY:2320.0 lowerLeftX:2456.0 lowerLeftY:2447.0 upperRightX:2562.0 upperRightY:2319.0 lowerRightX:2563.0 lowerRightY:2447.0];//トイレ２
+            [self mapInformation: point number:129 upperLeftX:2562.0 upperLeftY:2056.0 lowerLeftX:2563.0 lowerLeftY:2447.0 upperRightX:3146.0 upperRightY:2053.0 lowerRightX:3148.0 lowerRightY:2455.0];//講堂
+            [self mapInformation: point number:130 upperLeftX:3147.0 upperLeftY:2014.0 lowerLeftX:3147.0 lowerLeftY:2211.0 upperRightX:3267.0 upperRightY:2014.0 lowerRightX:3267.0 lowerRightY:3267.0];//音楽室
+            [self mapInformation: point number:131 upperLeftX:3149.0 upperLeftY:2213.0 lowerLeftX:3149.0 lowerLeftY:2278.0 upperRightX:3219.0 upperRightY:2213.0 lowerRightX:3219.0 lowerRightY:2277.0];//楽器倉庫1
+            [self mapInformation: point number:132 upperLeftX:3149.0 upperLeftY:2277.0 lowerLeftX:3149.0 lowerLeftY:2339.0 upperRightX:3219.0 upperRightY:2277.0 lowerRightX:3220.0 lowerRightY:2337.0];//楽器倉庫2
             [self mapInformation: point number:133 upperLeftX:3149.0 upperLeftY:2338.0 lowerLeftX:3149.0 lowerLeftY:2487.0 upperRightX:3267.0 upperRightY:2338.0 lowerRightX:3269.0 lowerRightY:2487.0];//音楽室2
             [self mapInformation: point number:134 upperLeftX:2456.0 upperLeftY:2056.0 lowerLeftX:2456.0 lowerLeftY:2447.0 upperRightX:3150.0 upperRightY:2055.0 lowerRightX:3150.0 lowerRightY:2446.0];//講堂
             break;
@@ -269,9 +288,10 @@
             [self mapInformation: point number:120 upperLeftX:3891.0 upperLeftY:3334.0 lowerLeftX:3918.0 lowerLeftY:3433.0 upperRightX:4021.0 upperRightY:3299.0 lowerRightX:4047.0 lowerRightY:3397.0];//トイレ
             [self mapInformation: point number:121 upperLeftX:3614.0 upperLeftY:3214.0 lowerLeftX:3613.0 lowerLeftY:3347.0 upperRightX:3749.0 upperRightY:3214.0 lowerRightX:3749.0 lowerRightY:3348.0];//2-A
             [self mapInformation: point number:122 upperLeftX:3613.0 upperLeftY:3092.0 lowerLeftX:3613.0 lowerLeftY:3214.0 upperRightX:3749.0 upperRightY:3092.0 lowerRightX:3749.0 lowerRightY:3214.0];//2-B
-            [self mapInformation: point number:123 upperLeftX:3791.0 upperLeftY:2964.0 lowerLeftX:3825.0 lowerLeftY:3092.0 upperRightX:3921.0 upperRightY:2929.0 lowerRightX:3956.0 lowerRightY:3055.0];//2-D
-            [self mapInformation: point number:124 upperLeftX:3825.0 upperLeftY:3092.0 lowerLeftX:3860.0 lowerLeftY:3218.0 upperRightX:3955.0 upperRightY:3056.0 lowerRightX:3990.0 lowerRightY:3181.0];//2-E
-            [self mapInformation: point number:125 upperLeftX:3860.0 upperLeftY:3218.0 lowerLeftX:3891.0 lowerLeftY:3334.0 upperRightX:3990.0 upperRightY:3181.0 lowerRightX:4021.0 lowerRightY:3298.0];//2-F
+            [self mapInformation: point number:123 upperLeftX:3613.0 upperLeftY:2970.0 lowerLeftX:3613.0 lowerLeftY:3092.0 upperRightX:3749.0 upperRightY:2970.0 lowerRightX:3749.0 lowerRightY:3092.0];//2-C
+            [self mapInformation: point number:124 upperLeftX:3791.0 upperLeftY:2964.0 lowerLeftX:3825.0 lowerLeftY:3092.0 upperRightX:3921.0 upperRightY:2929.0 lowerRightX:3956.0 lowerRightY:3055.0];//2-D
+            [self mapInformation: point number:125 upperLeftX:3825.0 upperLeftY:3092.0 lowerLeftX:3860.0 lowerLeftY:3218.0 upperRightX:3955.0 upperRightY:3056.0 lowerRightX:3990.0 lowerRightY:3181.0];//2-E
+            [self mapInformation: point number:126 upperLeftX:3860.0 upperLeftY:3218.0 lowerLeftX:3891.0 lowerLeftY:3334.0 upperRightX:3990.0 upperRightY:3181.0 lowerRightX:4021.0 lowerRightY:3298.0];//2-F
             [self mapInformation: point number:154 upperLeftX:855.0 upperLeftY:2669.0 lowerLeftX:853.0 lowerLeftY:2817.0 upperRightX:971.0 upperRightY:2669.0 lowerRightX:970.0 lowerRightY:2817.0];//科学実験室（1）
             [self mapInformation: point number:155 upperLeftX:971.0 upperLeftY:2669.0 lowerLeftX:971.0 lowerLeftY:2827.0 upperRightX:1087.0 upperRightY:2667.0 lowerRightX:1086.0 lowerRightY:2828.0];//科学実験室（2）
             [self mapInformation: point number:156 upperLeftX:1087.0 upperLeftY:2668.0 lowerLeftX:1087.0 lowerLeftY:2762.0 upperRightX:1206.0 upperRightY:2668.0 lowerRightX:1207.0 lowerRightY:2760.0];//科学講義室

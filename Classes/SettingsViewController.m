@@ -76,7 +76,7 @@
 - (IBAction)isStudent:(id)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if(_isStudent.on == YES) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"学院生モードをオンにしました。" message:@"使用上の注意をよく読んでお使いください" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"学院生モード\nをオンにしました" message:@"使用上の注意をよく読んでお使いください" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction* ok = [UIAlertAction
                          actionWithTitle:@"了解"
                          style:UIAlertActionStyleDefault

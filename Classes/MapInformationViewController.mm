@@ -7,6 +7,7 @@
 //
 
 #import "MapInformationViewController.h"
+#import "HUTransitionAnimator.h"
 
 @interface MapInformationViewController ()
 
@@ -16,6 +17,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationController.delegate = self;
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                              forBarMetrics:UIBarMetricsDefault];
@@ -113,6 +116,12 @@
                             }
                         }] resume];
     
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC{
+    HUTransitionAnimator *animator = [[HUTransitionAnimator alloc] init];
+    animator.presenting = (operation == UINavigationControllerOperationPop)?NO:YES;
+    return animator;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
