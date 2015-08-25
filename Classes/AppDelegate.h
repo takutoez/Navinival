@@ -20,6 +20,7 @@ public:
     void onSegmentedControlChanged(int story);
     void onLocationChanged(float latitude, float longitude);
     void onLocationBasedBeaconChanged(float x, float y, float z);
+    void onLocateButtonTapped();
 
     /**
     @brief    Implement Director and Scene init code here.

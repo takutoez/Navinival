@@ -32,6 +32,11 @@
     [super viewWillAppear:animated];
     ((RootViewController *)self.parentViewController.parentViewController.parentViewController).hideButton.hidden = NO;
     [((MapInformationContainerVisualEffectViewController *)self.parentViewController.parentViewController) changeToSend];
+    if(![_number isEqualToString:@""]){
+        [self loadDataWithNumber:_number];
+    }else{
+        [self loadDataGoodList];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -65,6 +70,8 @@
 
 - (void)loadDataWithNumber:(NSString *)number {
     
+    _number = number;
+    
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
     config.requestCachePolicy = NSURLRequestReloadIgnoringCacheData;
@@ -84,6 +91,7 @@
                                 }else{
                                     [((MapInformationContainerVisualEffectViewController *)self.parentViewController.parentViewController) appearStatus:@"情報がありません"];
                                 }
+                                self.parentViewController.view.hidden = NO;
                                 [self.tableView reloadData];
                                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                             }
@@ -91,6 +99,8 @@
 }
 
 - (void)loadDataGoodList {
+    
+    _number = @"";
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -111,6 +121,7 @@
                                 }else{
                                     [((MapInformationContainerVisualEffectViewController *)self.parentViewController.parentViewController) appearStatus:@"情報がありません"];
                                 }
+                                self.parentViewController.view.hidden = NO;
                                 [self.tableView reloadData];
                                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                             }

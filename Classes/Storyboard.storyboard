@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8173.3" systemVersion="15A244d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="1aL-Ge-Ygp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8173.3" systemVersion="15A263e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="1aL-Ge-Ygp">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8142"/>
@@ -7,6 +7,70 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="D1G-V1-yj4">
+            <objects>
+                <navigationController id="bV2-A6-R9k" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EBj-fZ-fv6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="1" green="0.1960784314" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="PAs-Wj-je3" kind="relationship" relationship="rootViewController" id="xCb-Go-eoK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gnk-nc-JtL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1331" y="-1766"/>
+        </scene>
+        <!--アンケート-->
+        <scene sceneID="ZVM-ma-zGL">
+            <objects>
+                <viewController id="PAs-Wj-je3" customClass="EnqueteViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZnH-ez-12A"/>
+                        <viewControllerLayoutGuide type="bottom" id="AV9-YB-zHA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nao-dt-Sad">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="reI-ES-3u0">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="reI-ES-3u0" secondAttribute="trailing" id="WyM-SL-Xff"/>
+                            <constraint firstItem="AV9-YB-zHA" firstAttribute="top" secondItem="reI-ES-3u0" secondAttribute="bottom" id="h9c-0R-1DO"/>
+                            <constraint firstItem="reI-ES-3u0" firstAttribute="top" secondItem="nao-dt-Sad" secondAttribute="top" id="iCC-BU-GpD"/>
+                            <constraint firstItem="reI-ES-3u0" firstAttribute="leading" secondItem="nao-dt-Sad" secondAttribute="leading" id="sDt-9g-Qv6"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="アンケート" id="KH5-uv-53l">
+                        <barButtonItem key="leftBarButtonItem" title="後で" id="8E7-Lm-3O6">
+                            <connections>
+                                <action selector="later:" destination="PAs-Wj-je3" id="Jo4-5A-o0U"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="webView" destination="reI-ES-3u0" id="58H-In-Giu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MeT-Nr-aZs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-519" y="-1766"/>
+        </scene>
         <!--マップ-->
         <scene sceneID="TR4-2C-J8v">
             <objects>
@@ -48,25 +112,28 @@
                                     <rect key="frame" x="0.0" y="0.0" width="567" height="65.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" tag="2" contentMode="left" fixedFrame="YES" text="3-A Beat Dance Popper" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b0I-Q5-iqE">
-                                            <rect key="frame" x="40" y="18" width="168" height="30"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" tag="2" contentMode="left" ambiguous="YES" misplaced="YES" text="3-A Beat Dance Popper" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b0I-Q5-iqE">
+                                            <rect key="frame" x="40" y="18" width="308" height="30"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="94 Goods" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nzF-UV-euW">
-                                            <rect key="frame" x="216" y="22" width="203" height="21"/>
-                                            <animations/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="1" green="0.1960784314" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QcD-dw-G1Z">
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QcD-dw-G1Z">
                                             <rect key="frame" x="15" y="22" width="17" height="21"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="94 Goods" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nzF-UV-euW">
+                                            <rect key="frame" x="356" y="24" width="203" height="21"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="90" id="BT4-Nh-byB"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="1" green="0.1960784314" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -74,6 +141,10 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="nzF-UV-euW" secondAttribute="trailing" id="1mP-Nv-84S"/>
+                                        <constraint firstItem="nzF-UV-euW" firstAttribute="leading" secondItem="b0I-Q5-iqE" secondAttribute="trailing" constant="8" id="2Ut-AN-LvF"/>
+                                        <constraint firstItem="b0I-Q5-iqE" firstAttribute="leading" secondItem="QcD-dw-G1Z" secondAttribute="trailing" constant="8" id="3FH-i3-x8T"/>
+                                        <constraint firstItem="QcD-dw-G1Z" firstAttribute="leading" secondItem="4DD-Ww-UN3" secondAttribute="leadingMargin" constant="7" id="UpZ-jx-A3O"/>
+                                        <constraint firstItem="nzF-UV-euW" firstAttribute="leading" secondItem="b0I-Q5-iqE" secondAttribute="trailing" constant="8" id="wGS-UC-cHr"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <animations/>
@@ -379,6 +450,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="bV2-A6-R9k" kind="presentation" identifier="ToEnquete" id="CzQ-bb-8gm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7LS-op-BUT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1619,7 +1693,7 @@
                             <tableViewSection headerTitle="オプション" id="6FD-kc-gFm">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="100" id="E9Z-Hq-27A">
-                                        <rect key="frame" x="0.0" y="416.5" width="600" height="100"/>
+                                        <rect key="frame" x="0.0" y="416" width="600" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E9Z-Hq-27A" id="gBO-bM-trb">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="99.5"/>
@@ -1650,7 +1724,7 @@
                             <tableViewSection id="wqf-Og-dfL">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="oph-ZM-xpN" style="IBUITableViewCellStyleDefault" id="cCf-Bj-SJJ">
-                                        <rect key="frame" x="0.0" y="536.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="536" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cCf-Bj-SJJ" id="Lkl-MR-IL5">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -1808,7 +1882,7 @@
                             <tableViewSection headerTitle="その他" id="jnY-oD-Avh">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" textLabel="4jJ-rT-tUM" style="IBUITableViewCellStyleDefault" id="DU0-Dg-man">
-                                        <rect key="frame" x="0.0" y="304" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="303.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DU0-Dg-man" id="1eN-1h-Ucc">
                                             <rect key="frame" x="0.0" y="0.0" width="553" height="43.5"/>
@@ -2064,7 +2138,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="情報の入力" id="RGJ-Lm-WPX">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="3hw-ge-U5k">
+                        <barButtonItem key="leftBarButtonItem" title="キャンセル" id="3hw-ge-U5k">
                             <connections>
                                 <action selector="cancel:" destination="Eyb-w3-ZRi" id="XG1-aB-4fA"/>
                             </connections>
@@ -2205,7 +2279,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" tag="2" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Cbn-hI-kEB">
@@ -2278,7 +2352,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="場所を選択" id="mUF-pL-AEw">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Vfk-N2-zGd">
+                        <barButtonItem key="leftBarButtonItem" title="キャンセル" id="Vfk-N2-zGd">
                             <connections>
                                 <action selector="cancel:" destination="iQu-Zz-KFr" id="HOp-bd-tzN"/>
                             </connections>
@@ -2352,7 +2426,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cdl-xR-UWB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-519" y="1504"/>
+            <point key="canvasLocation" x="-1331" y="1504"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="CTs-gB-qRK">
@@ -2369,7 +2443,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MIW-9X-jtu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-124" y="1851"/>
+            <point key="canvasLocation" x="-519" y="1504"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="emm-EF-Cfe">
@@ -2463,7 +2537,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="マップ情報の入力" id="PdS-mq-9Nj">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="d7b-0k-YEq">
+                        <barButtonItem key="leftBarButtonItem" title="キャンセル" id="d7b-0k-YEq">
                             <connections>
                                 <action selector="cancel:" destination="jmJ-4N-QXS" id="XbJ-Fp-cjr"/>
                             </connections>

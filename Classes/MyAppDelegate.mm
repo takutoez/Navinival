@@ -22,7 +22,7 @@
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
-    _baseUrl = @"http://126.217.92.188:8080";
+    _baseUrl = @"http://navinival.com";
     
     [Parse setApplicationId:@"ERYPrORJqGmfiaQN66gNPCyhX30i9ZtMnRMf2BeS"
                   clientKey:@"zbFmvecCs7LoqXRJ1bZNpSVH8yX9oKmposYb9GTn"];
@@ -45,7 +45,17 @@
     [[delegateFreeSession dataTaskWithURL: [NSURL URLWithString:[NSString stringWithFormat:@"%@/app/gakuin/map/data/", BASE_URL]]
                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                             if (error != nil){
-                                NSLog(@"Got response %@ with error %@.\n", response, error);
+                                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"インターネットに接続されていません" message:@"情報の取得にはインターネットに接続する必要があります。" preferredStyle:UIAlertControllerStyleAlert];
+                                UIAlertAction* ok = [UIAlertAction
+                                                     actionWithTitle:@"OK"
+                                                     style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * action)
+                                                     {
+                                                         [alert dismissViewControllerAnimated:YES completion:nil];
+                                                         
+                                                     }];
+                                [alert addAction:ok];
+                                [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
                             }else{
                                 NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
                                 _mapArray = [NSMutableArray array];
@@ -55,6 +65,8 @@
                                 }
                             }
                         }] resume];
+    
+    
     
     return YES;
 }
@@ -121,14 +133,18 @@
     if((lowerLeftX - upperLeftX) * (point.y - upperLeftY) - (lowerLeftY - upperLeftY) * (point.x - upperLeftX) < 0 && (lowerRightX - lowerLeftX) * (point.y - lowerLeftY) - (lowerRightY - lowerLeftY) * (point.x - lowerLeftX) < 0 && (upperRightX - lowerRightX) * (point.y - lowerRightY) - (upperRightY - lowerRightY) * (point.x - lowerRightX) < 0 && (upperLeftX - upperRightX) * (point.y - upperRightY) - (upperLeftY - upperRightY) * (point.x - upperRightX) < 0){
             [_mapArray enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
                 if ([[obj objectForKey:@"number"] intValue] == number) {
-                    [(RootViewController *)[[((UITabBarController *)self.window.rootViewController) viewControllers] objectAtIndex:0].childViewControllers[0] showMapInformation:[NSString stringWithFormat: @"%ld", (long)number]];
+                    [[[[[(UITabBarController *)[[self window] rootViewController] viewControllers] objectAtIndex:0] childViewControllers] objectAtIndex:0] showMapInformation:[NSString stringWithFormat:@"%ld", (long)number]];
                     *stop = YES;
                 }
             }];
     }
 }
 
-- (void)mapDataX:(int)x withY:(int)y withFloor:(int)floor{
+- (void)changeStory:(int)floor {
+    [[[[[(UITabBarController *)[[self window] rootViewController] viewControllers] objectAtIndex:0] childViewControllers] objectAtIndex:0] changeStory:floor];
+}
+
+- (void)mapDataX:(int)x withY:(int)y withFloor:(int)floor {
     NSLog(@"%d, %d", x, y);
     CGPoint point = CGPointMake(x, y);
     switch(floor){

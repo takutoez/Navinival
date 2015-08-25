@@ -15,6 +15,7 @@
 @interface MapInformationViewController : UITableViewController <UINavigationControllerDelegate>
 
 @property (strong, nonatomic)NSMutableArray *informationArray;
+@property NSString *number;
 
 - (void)loadDataWithNumber:(NSString *)number;
 - (void)loadDataGoodList;

@@ -45,6 +45,7 @@
 
 @property (strong, nonatomic) UIView *mapInformationView;
 @property (strong, nonatomic) UIButton *hideButton;
+@property (strong, nonatomic) UIButton *locateButton;
 
 - (void)startBeacon:(NSMutableArray *)array;
 - (void)oneBeaconWithMajor:(int *)majors minor:(int *)minors;
@@ -53,6 +54,8 @@
 - (void)fourBeaconsWithMajor:(int *)majors minor:(int *)minors;
 - (void)showMapInformation:(NSString *)number;
 - (void)showGoodList;
+- (void)locate;
+- (void)changeStory:(int)floor;
 
 - (IBAction)goodListButton:(id)sender;
 - (IBAction)searchButton:(id)sender;

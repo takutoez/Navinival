@@ -20,6 +20,7 @@ public:
     void onSegmentedControlChanged(int story);
     void onLocationChanged(float latitude, float longitude);
     void onLocationBasedBeaconChanged(float pixelX, float pixelY, float pixelZ);
+    void onLocateButtonTapped();
     
     cocos2d::Point transformPoint(cocos2d::Point point);
     
@@ -36,6 +37,9 @@ public:
     float pinY;
     float pinZ;
     int story;
+    
+    bool inGakuin;
+    bool follow;
     
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);

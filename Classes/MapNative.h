@@ -13,6 +13,7 @@ class MapNative
 {
 public:
     static void mapData(int x, int y, int floor);
+    static void changeStory(int floor);
 };
 
 #endif

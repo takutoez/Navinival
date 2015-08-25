@@ -14,3 +14,8 @@ void MapNative::mapData(int x, int y, int floor)
     MyAppDelegate *delegate = (MyAppDelegate *)[UIApplication sharedApplication].delegate;
     [delegate mapDataX:x withY:y withFloor:floor];
 }
+
+void MapNative::changeStory(int floor){
+    MyAppDelegate *delegate = (MyAppDelegate *)[UIApplication sharedApplication].delegate;
+    [delegate changeStory:floor];
+}

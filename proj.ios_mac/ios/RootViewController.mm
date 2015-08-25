@@ -29,6 +29,7 @@
 #import "platform/ios/CCEAGLView-ios.h"
 #import "HelloWorldScene.h"
 #import "NavigationBarWithSegmentedControl.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation RootViewController
 
@@ -128,6 +129,14 @@ static AppDelegate s_sharedApplication;
     [segmentedControl setHidden:YES];
     [[[UIApplication sharedApplication] keyWindow] addSubview:segmentedControl];
     
+    _locateButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_locateButton addTarget:self
+                      action:@selector(locate)
+            forControlEvents:UIControlEventTouchUpInside];
+    [_locateButton setImage:[UIImage imageNamed:@"locate.png"] forState:UIControlStateNormal];
+    _locateButton.frame = CGRectMake(window.frame.size.width - 52, window.frame.size.height - self.tabBarController.tabBar.frame.size.height - 52, 44, 44);
+    [self.view addSubview:_locateButton];
+    
      MapInformationContainerVisualEffectViewController *mapInformationContaienrViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"mapInformationContainer"];
     _mapInformationView = mapInformationContaienrViewController.view;
     _mapInformationView.layer.cornerRadius = 20.0f;
@@ -157,6 +166,14 @@ static AppDelegate s_sharedApplication;
     [self addChildViewController:searchViewController];
     [visualEffectView setAlpha:0.0];
     [visualEffectView setHidden:YES];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy/MM/dd HH:mm";
+    NSDate *now = [NSDate date];
+    NSDate *finishTime = [dateFormatter dateFromString:@"2015/10/11 18:00"];
+    if([now compare:finishTime] == NSOrderedDescending && ![[NSUserDefaults standardUserDefaults] objectForKey:@"DID_ENQUETE"]){
+        [self performSegueWithIdentifier:@"ToEnquete" sender:self];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -333,7 +350,7 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status
     
     [((MapInformationContainerVisualEffectViewController *)self.childViewControllers[0]) changeTitleMapInformationWithNumber:number];
     
-    [((MapInformationViewController *)((MapInformationContainerVisualEffectViewController *)self.childViewControllers[0]).childViewControllers[0].childViewControllers[0]) loadDataWithNumber:number];
+    [[[[[[[self childViewControllers] objectAtIndex:0] childViewControllers] objectAtIndex:0] childViewControllers] objectAtIndex:0] loadDataWithNumber:number];
     
 }
 
@@ -363,7 +380,7 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status
     [((MapInformationContainerVisualEffectViewController *)self.childViewControllers[0]) changeTitleGoodList];
     
     
-    [((MapInformationViewController *)((MapInformationContainerVisualEffectViewController *)self.childViewControllers[0]).childViewControllers[0].childViewControllers[0]) loadDataGoodList];
+    [[[[[[[self childViewControllers] objectAtIndex:0] childViewControllers] objectAtIndex:0] childViewControllers] objectAtIndex:0] loadDataGoodList];
 }
 
 - (void)hideMapInformation:(id)sender {
@@ -387,6 +404,14 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status
                          }
                          completion:nil];
     }
+}
+
+- (void)locate {
+    s_sharedApplication.onLocateButtonTapped();
+}
+
+- (void)changeStory:(int)floor {
+    segmentedControl.selectedSegmentIndex = (NSInteger)floor;
 }
 
 // Override to allow orientations other than the default portrait orientation.
@@ -467,5 +492,6 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status
                              [visualEffectView setHidden:YES];
                          }];
     }
+    [self.view endEditing:YES];
 }
 @end

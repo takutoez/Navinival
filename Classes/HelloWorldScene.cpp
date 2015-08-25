@@ -69,10 +69,12 @@ bool HelloWorld::init()
     addChild(story2Sprite);
     
     mapPosition = Vec2(2338, 2856);
-    CCLOG("%f", 0.15f * tan(M_PI/4 - atan2(0.10f,0.15f)));
     pinX = 0;
     pinY = 0;
+    pinZ = 0;
     story = 0;
+    
+    follow = true;
     
     camera = Camera::createPerspective(90, (GLfloat)visibleSize.width/visibleSize.height, 0.01, 1000);
     
@@ -81,20 +83,6 @@ bool HelloWorld::init()
     camera->lookAt(Vec3(0, 0, 0), Vec3(0, 1, 0));
     
     addChild(camera); //add camera to the scene
-    
-    auto light = DirectionLight::create(Vec3(-0.0001f, -0.0001f, 0.0f), Color3B::WHITE);
-    //addChild (light);
-    
-    auto r = 1.0f;
-    
-    auto back = MoveBy::create(5.0f, Vec3(0, 0, -r));
-    auto right = MoveBy::create(5.0f, Vec3(-r, 0 , 0));
-    auto forward = MoveBy::create(5.0f, Vec3(0, 0, r));
-    auto left = MoveBy::create(5.0f, Vec3(+r , 0, 0));
-    
-    auto sequence = Sequence::create(back, right, forward, left, NULL);
-    
-    //pinSprite->runAction(RepeatForever::create(sequence));
     
     this->runAction(Follow::create(pinSprite));
     
@@ -122,6 +110,7 @@ void HelloWorld::onTouchMoved(Touch *touch, Event *event){
     story2Sprite->runAction(EaseBackOut::create(MoveBy::create(0.2, Vec3(-newLocation.x*0.0003, 0, newLocation.y*0.0003))));
     pinSprite->runAction(EaseBackOut::create(MoveBy::create(0.2, Vec3(-newLocation.x*0.0003, 0, newLocation.y*0.0003))));
     mapPosition += Vec2(newLocation.x*0.0003*2856, -newLocation.y*0.0003*2856);
+    follow = false;
 }
 
 void HelloWorld::onTouchEnded(Touch *touch, Event *event){
@@ -157,7 +146,7 @@ Point HelloWorld::transformPoint(Point point){
     CCLOG("WIDTH:%f HEIGHT:%f", result.x/size.width - 0.5, result.z/size.height + 0.5);
     float x = mapPosition.x + (result.x/size.width - 0.5)*width*2856;
     float y = mapPosition.y + (result.z/size.height + 0.32)*height*2856;
-    CCLOG("%f %f", mapPosition.x, mapPosition.y);
+    CCLOG("%f %f", result.x, result.z);
     return Point(x, y);
 }
 
@@ -181,17 +170,61 @@ void HelloWorld::onLocationChanged(float latitude, float longitude){
     
     float x = gapX / 2024;
     float y = gapY / 2024;
-    pinSprite->runAction(MoveBy::create(0.5, Vec3(x-pinX, 0, y-pinY)));
-    pinX = x;
-    pinY = y;
+    if(std::abs(x) < 1 && std::abs(y) < 1){
+        if(follow){
+            story0Sprite->runAction(MoveBy::create(0.5, Vec3(pinX-x, pinZ, pinY-y)));
+            story1Sprite->runAction(MoveBy::create(0.5, Vec3(pinX-x, pinZ, pinY-y)));
+            story2Sprite->runAction(MoveBy::create(0.5, Vec3(pinX-x, pinZ, pinY-y)));
+            mapPosition -= Vec2((pinX-x)*2856, (pinY-y)*2856);
+        }else{
+            pinSprite->runAction(MoveBy::create(0.5, Vec3(x-pinX, -pinZ, y-pinY)));
+        }
+        pinX = x;
+        pinY = y;
+        pinZ = 0;
+        inGakuin = true;
+        pinSprite->setVisible(true);
+    }else{
+        inGakuin = false;
+        pinSprite->setVisible(false);
+    }
 }
 
 void HelloWorld::onLocationBasedBeaconChanged(float pixelX, float pixelY, float pixelZ){
     float x = pixelX / 2856 - 1.0;
     float y = pixelY / 2556 - 1.0;
     float z = pixelZ * 0.15;
-    pinSprite->runAction(MoveBy::create(0.5, Vec3(x-pinX, z-pinZ, y-pinY)));
-    pinX = x;
-    pinY = y;
-    pinZ = z;
+    if(std::abs(x) < 1 && std::abs(y) < 1){
+        if(follow){
+            story0Sprite->runAction(MoveBy::create(0.5, Vec3(pinX-x, pinZ-z, pinY-y)));
+            story1Sprite->runAction(MoveBy::create(0.5, Vec3(pinX-x, pinZ-z, pinY-y)));
+            story2Sprite->runAction(MoveBy::create(0.5, Vec3(pinX-x, pinZ-z, pinY-y)));
+            mapPosition -= Vec2((pinX-x)*2856, (pinY-y)*2856);
+        }else{
+            pinSprite->runAction(MoveBy::create(0.5, Vec3(x-pinX, z-pinZ, y-pinY)));
+        }
+        pinX = x;
+        pinY = y;
+        pinZ = z;
+        inGakuin = true;
+        pinSprite->setVisible(true);
+        MapNative::changeStory(pixelZ);
+        story = pinZ/0.15;
+    }else{
+        inGakuin = false;
+        pinSprite->setVisible(false);
+    }
+}
+
+void HelloWorld::onLocateButtonTapped(){
+    follow = true;
+    if(inGakuin){
+        pinSprite->runAction(MoveBy::create(0.5, Vec3(((mapPosition.x+518)/2856-1.0)-pinX, story*0.15-pinZ, (mapPosition.y/2856-1.0)-pinY)));
+        story0Sprite->runAction(MoveBy::create(0.5, Vec3(((mapPosition.x+518)/2856-1.0)-pinX, story*0.15-pinZ, (mapPosition.y/2856-1.0)-pinY)));
+        story1Sprite->runAction(MoveBy::create(0.5, Vec3(((mapPosition.x+518)/2856-1.0)-pinX, story*0.15-pinZ, (mapPosition.y/2856-1.0)-pinY)));
+        story2Sprite->runAction(MoveBy::create(0.5, Vec3(((mapPosition.x+518)/2856-1.0)-pinX, story*0.15-pinZ, (mapPosition.y/2856-1.0)-pinY)));
+        mapPosition -= Vec2((((mapPosition.x+518)/2856-1.0)-pinX)*2856, ((mapPosition.y/2856-1.0)-pinY)*2856);
+    }
+    MapNative::changeStory(pinZ/0.15);
+    story = pinZ/0.15;
 }

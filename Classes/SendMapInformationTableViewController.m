@@ -49,7 +49,9 @@
                                 config.requestCachePolicy = NSURLRequestReloadIgnoringCacheData;
                                 NSURLSession *delegateFreeSession = [NSURLSession sessionWithConfiguration: config delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
                                    
-                                NSData *data = [[NSString stringWithFormat:@"password=%@&map_number=%@&information_number=%@", alertController.textFields.firstObject.text, _number, _informationNumber] dataUsingEncoding:NSUTF8StringEncoding];
+                                UITextField *field = alertController.textFields.firstObject;
+                                   
+                                NSData *data = [[NSString stringWithFormat:@"password=%@&map_number=%@&information_number=%@", field.text, _number, _informationNumber] dataUsingEncoding:NSUTF8StringEncoding];
                                    
                                 NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/app/gakuin/form/map/information/password/", BASE_URL]]];
                                 request.HTTPMethod = @"POST";

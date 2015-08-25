@@ -59,6 +59,10 @@ void AppDelegate::onLocationBasedBeaconChanged(float x, float y, float z){
     helloWorld->getInstance()->onLocationBasedBeaconChanged(x, y, z);
 }
 
+void AppDelegate::onLocateButtonTapped(){
+    helloWorld->getInstance()->onLocateButtonTapped();
+}
+
 // This function will be called when the app is inactive. When comes a phone call,it's be invoked too
 void AppDelegate::applicationDidEnterBackground() {
     Director::getInstance()->stopAnimation();

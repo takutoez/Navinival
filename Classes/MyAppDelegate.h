@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSMutableArray *beaconArray;
 @property (strong, nonatomic) UIVisualEffectView *mapInformationView;
 
+- (void)changeStory:(int)floor;
 - (void)mapDataX:(int)x withY:(int)y withFloor:(int)floor;
 
 @end

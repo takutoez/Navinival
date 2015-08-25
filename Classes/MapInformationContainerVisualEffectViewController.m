@@ -28,6 +28,7 @@
     _titleLabel.text = @"Goodリスト";
     _statusLabel.hidden = YES;
     _rightButton.hidden = YES;
+    [[self.childViewControllers[0] view] setHidden:YES];
 }
 
 - (void)changeTitleMapInformationWithNumber:(NSString *)number {
@@ -40,6 +41,7 @@
     }else{
         _rightButton.hidden = YES;
     }
+    [[self.childViewControllers[0] view] setHidden:YES];
 }
 
 - (void)appearStatus:(NSString *)status {

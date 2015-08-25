@@ -24,7 +24,7 @@
     self.navigationItem.title = _titleString;
     _content.text = _contentString;
     [_content sizeToFit];
-    _good.text = [NSString stringWithFormat:@"%@%@",  _goodString, @"Goods"];
+    _good.text = [NSString stringWithFormat:@"%@Goods",  _goodString];
     
 }
 
