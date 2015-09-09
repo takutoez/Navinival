@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!-- AppCompat の actionBarStyle を設定 -->
+        <item name="actionBarStyle">@style/AppTheme</item>
+
+        <!-- AppCompat の color theming attrs を設定 -->
+        <item name="ToolBarColor">@color/tomato</item>
+
+    <!-- 他の属性 -->
+    </style>
+</resources>
