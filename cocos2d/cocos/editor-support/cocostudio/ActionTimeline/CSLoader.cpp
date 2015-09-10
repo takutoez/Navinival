@@ -63,7 +63,8 @@
 #include "cocostudio/WidgetReader/Sprite3DReader/Sprite3DReader.h"
 #include "cocostudio/WidgetReader/UserCameraReader/UserCameraReader.h"
 #include "cocostudio/WidgetReader/Particle3DReader/Particle3DReader.h"
-
+#include "cocostudio/WidgetReader/SkeletonReader/BoneNodeReader.h"
+#include "cocostudio/WidgetReader/SkeletonReader/SkeletonNodeReader.h"
 #include "flatbuffers/flatbuffers.h"
 #include "flatbuffers/util.h"
 
@@ -212,6 +213,8 @@ CSLoader::CSLoader()
     CREATE_CLASS_NODE_READER_INFO(Sprite3DReader);
     CREATE_CLASS_NODE_READER_INFO(UserCameraReader);
     CREATE_CLASS_NODE_READER_INFO(Particle3DReader);
+    CREATE_CLASS_NODE_READER_INFO(BoneNodeReader);
+    CREATE_CLASS_NODE_READER_INFO(SkeletonNodeReader);
 }
 
 void CSLoader::purge()
@@ -376,7 +379,7 @@ Node* CSLoader::loadNodeWithContent(const std::string& content)
     doc.Parse<0>(content.c_str());
     if (doc.HasParseError())
     {
-        CCLOG("GetParseError %s\n", doc.GetParseError());
+        CCLOG("GetParseError %d\n", doc.GetParseError());
     }
     
     // cocos2dx version mono editor is based on
@@ -724,7 +727,7 @@ Node* CSLoader::loadWidget(const rapidjson::Value& json)
             customJsonDict.Parse<0>(customProperty);
             if (customJsonDict.HasParseError())
             {
-                CCLOG("GetParseError %s\n", customJsonDict.GetParseError());
+                CCLOG("GetParseError %d\n", customJsonDict.GetParseError());
             }
             
             widgetPropertiesReader->setPropsForAllCustomWidgetFromJsonDictionary(classname, widget, customJsonDict);

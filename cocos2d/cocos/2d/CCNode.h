@@ -52,6 +52,7 @@ class Renderer;
 class Director;
 class GLProgram;
 class GLProgramState;
+class Material;
 #if CC_USE_PHYSICS
 class PhysicsBody;
 class PhysicsWorld;
@@ -1487,6 +1488,29 @@ public:
     virtual const Mat4& getNodeToParentTransform() const;
     virtual AffineTransform getNodeToParentAffineTransform() const;
 
+    /**
+     * Returns the matrix that transform the node's (local) space coordinates into the parent's space coordinates.
+     * The matrix is in Pixels.
+     * Note: If acenstor is not a valid ancestor of the node, the API would return the same value as @see getNodeToWorldTransform
+     *
+     * @param ancestor The parent's node pointer.
+     * @since v3.7
+     * @return The transformation matrix.
+     */
+    virtual Mat4 getNodeToParentTransform(Node* ancestor) const;
+
+    /**
+     * Returns the affline transform matrix that transform the node's (local) space coordinates into the parent's space coordinates.
+     * The matrix is in Pixels.
+     *
+     * Note: If acenstor is not a valid ancestor of the node, the API would return the same value as @see getNodeToWorldAffineTransform
+     *
+     * @param ancestor The parent's node pointer.
+     * @since v3.7
+     * @return The affline transformation matrix.
+     */
+    virtual AffineTransform getNodeToParentAffineTransform(Node* ancestor) const;
+
     /** 
      * Sets the transformation matrix manually.
      *
@@ -1843,6 +1867,9 @@ protected:
     PhysicsWorld* _physicsWorld; /** The PhysicsWorld associated with the node.*/
     int _physicsBodyAssociatedWith;  /** The count of PhysicsBody associated with the node and children.*/
     float _physicsRotationOffset;  /** Record the rotation value when invoke Node::setPhysicsBody.*/
+
+    float _offsetX;
+    float _offsetY;
 #endif
     
     // opacity controls

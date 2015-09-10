@@ -3,9 +3,8 @@
     package="org.cocos2dx.lib.test" >
 
     <uses-sdk
-        android:maxSdkVersion="21"
-        android:minSdkVersion="16"
-        android:targetSdkVersion="21" />
+        android:minSdkVersion="10"
+        android:targetSdkVersion="22" />
 
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"

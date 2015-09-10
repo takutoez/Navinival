@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <color name="tomato">#FF3200</color>
+    <color name="dark_tomato">#CF0200</color>
+    <color name="light_tomato">#FF6230</color>
+</resources>
