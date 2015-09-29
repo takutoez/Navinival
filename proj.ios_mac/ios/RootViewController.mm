@@ -211,31 +211,39 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 
 - (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region
 {
-    [locationManager requestStateForRegion:_beaconRegion];
-    [locationManager startRangingBeaconsInRegion:_beaconRegion];
+    if(_beaconArray != nil) {
+        [locationManager requestStateForRegion:_beaconRegion];
+        [locationManager startRangingBeaconsInRegion:_beaconRegion];
+    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
 {
     if (beacons.count > 0) {
         [locationManager stopUpdatingLocation];
-        
         int majors[4];
         int minors[4];
         CLProximity proximities[4];
+        NSSortDescriptor *nameSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"self.rssi.intValue" ascending:NO];
+        NSMutableArray *array = (NSMutableArray *)[beacons sortedArrayUsingDescriptors:@[nameSortDescriptor]];
+        
         for(int i = 0; i < 4; i++){
-            if(beacons.count > i){
-                majors[i] = ((CLBeacon *)beacons[i]).major.intValue;
-                minors[i] = ((CLBeacon *)beacons[i]).minor.intValue;
-                proximities[i] = ((CLBeacon *)beacons[i]).proximity;
-            }else{
-                majors[i] = -1;
-                minors[i] = -1;
-                proximities[i] = CLProximityUnknown;
+            majors[i] = -1;
+            minors[i] = -1;
+            proximities[i] = CLProximityUnknown;
+        }
+        
+        int j = 0;
+        for(int i = 0; i < beacons.count; i++){
+            if(((CLBeacon *)array[j]).proximity != 0 && 4 > j){
+                majors[j] = ((CLBeacon *)array[i]).major.intValue;
+                minors[j] = ((CLBeacon *)array[i]).minor.intValue;
+                proximities[j] = ((CLBeacon *)array[i]).proximity;
+                j++;
             }
         }
         
-        NSLog(@"proximity:%ld, %ld", (long)proximities[0], (long)proximities[1]);
+        NSLog(@"proximity:%ld, %ld, %ld, %ld", (long)proximities[0], (long)proximities[1], (long)proximities[2], (long)proximities[3]);
         
         if(proximities[0] == CLProximityImmediate) {
             [self oneBeaconWithMajor:majors minor:minors];
@@ -244,13 +252,11 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status
         }else if(proximities[0] == CLProximityNear && proximities[1] == CLProximityNear && proximities[2] == CLProximityNear){
             [self threeBeaconsWithMajor:majors minor:minors];
         }else if(proximities[0] == CLProximityNear && proximities[1] == CLProximityNear){
-            [self twoBeaconsWithMajor:majors minor:minors];
+            [self twoBeaconsHaveDifferentProximityWithMajor:majors minor:minors];
         }else if(proximities[0] == CLProximityNear){
             [self oneBeaconWithMajor:majors minor:minors];
-        }else if(proximities[0] == CLProximityFar && proximities[1] == CLProximityFar && proximities[2] == CLProximityFar && proximities[3] == CLProximityFar){
-            [self fourBeaconsWithMajor:majors minor:minors];
-        }else if(proximities[0] == CLProximityFar && proximities[1] == CLProximityFar && proximities[2] == CLProximityFar){
-            [self threeBeaconsWithMajor:majors minor:minors];
+        }else if(proximities[0] == CLProximityFar && proximities[1] == CLProximityFar){
+            [self twoBeaconsHaveDifferentProximityWithMajor:majors minor:minors];
         }else{
             [locationManager startUpdatingLocation];
         }
@@ -281,6 +287,24 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status
     float x = ([[first objectForKey:@"x"] floatValue] + [[second objectForKey:@"x"] floatValue])/2;
     float y = ([[first objectForKey:@"y"] floatValue] + [[second objectForKey:@"y"] floatValue])/2;
     float z = [[first objectForKey:@"z"] floatValue];
+    NSLog(@"%f %f", [[first objectForKey:@"y"] floatValue], [[second objectForKey:@"y"] floatValue]);
+    s_sharedApplication.onLocationBasedBeaconChanged(x, y, z);
+}
+
+- (void)twoBeaconsHaveDifferentProximityWithMajor:(int *)majors minor:(int *)minors {
+    __block NSDictionary *first;
+    __block NSDictionary *second;
+    [_beaconArray enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
+        if ([[obj objectForKey:@"major"] intValue] == majors[0] && [[obj objectForKey:@"minor"] intValue] == minors[0]) {
+            first = obj;
+        }else if ([[obj objectForKey:@"major"] intValue] == majors[1] && [[obj objectForKey:@"minor"] intValue] == minors[1]){
+            second = obj;
+        }
+    }];
+    float x = ([[first objectForKey:@"x"] floatValue]*3 + [[second objectForKey:@"x"] floatValue])/4;
+    float y = ([[first objectForKey:@"y"] floatValue]*3 + [[second objectForKey:@"y"] floatValue])/4;
+    float z = [[first objectForKey:@"z"] floatValue];
+    NSLog(@"%f %f", [[first objectForKey:@"y"] floatValue], [[second objectForKey:@"y"] floatValue]);
     s_sharedApplication.onLocationBasedBeaconChanged(x, y, z);
 }
 
@@ -298,8 +322,9 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status
         }
     }];
     float x = ([[first objectForKey:@"x"] floatValue] + [[second objectForKey:@"x"] floatValue] + [[third objectForKey:@"x"] floatValue])/3;
-    float y = ([[first objectForKey:@"y"] floatValue] + [[second objectForKey:@"y"] floatValue] + [[third objectForKey:@"x"] floatValue])/3;
+    float y = ([[first objectForKey:@"y"] floatValue] + [[second objectForKey:@"y"] floatValue] + [[third objectForKey:@"y"] floatValue])/3;
     float z = [[first objectForKey:@"z"] floatValue];
+    NSLog(@"%f %f %f", [[first objectForKey:@"y"] floatValue], [[second objectForKey:@"y"] floatValue], [[third objectForKey:@"y"] floatValue]);
     s_sharedApplication.onLocationBasedBeaconChanged(x, y, z);
 }
 
@@ -320,8 +345,9 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status
         }
     }];
     float x = ([[first objectForKey:@"x"] floatValue] + [[second objectForKey:@"x"] floatValue] + [[third objectForKey:@"x"] floatValue] + [[fourth objectForKey:@"x"] floatValue])/4;
-    float y = ([[first objectForKey:@"y"] floatValue] + [[second objectForKey:@"y"] floatValue] + [[third objectForKey:@"x"] floatValue] + [[fourth objectForKey:@"x"] floatValue])/4;
+    float y = ([[first objectForKey:@"y"] floatValue] + [[second objectForKey:@"y"] floatValue] + [[third objectForKey:@"y"] floatValue] + [[fourth objectForKey:@"y"] floatValue])/4;
     float z = [[first objectForKey:@"z"] floatValue];
+    NSLog(@"%f %f %f %f => %f", [[first objectForKey:@"y"] floatValue], [[second objectForKey:@"y"] floatValue], [[third objectForKey:@"y"] floatValue], [[fourth objectForKey:@"y"] floatValue], y);
     s_sharedApplication.onLocationBasedBeaconChanged(x, y, z);
 }
 

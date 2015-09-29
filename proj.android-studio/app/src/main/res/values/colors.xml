@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="white">#FFFFFF</color>
     <color name="tomato">#FF3200</color>
     <color name="dark_tomato">#CF0200</color>
     <color name="light_tomato">#FF6230</color>
+    <color name="text">#000000</color>
+    <color name="meta_text">#AAAAAA</color>
+    <color name="divider">#888888</color>
 </resources>

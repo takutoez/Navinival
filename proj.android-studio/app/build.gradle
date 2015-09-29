@@ -6,8 +6,8 @@ android {
 
     defaultConfig {
         applicationId "jp.cocos2dx.newgame"
-        minSdkVersion 16
-        maxSdkVersion 21
+        minSdkVersion 15
+        maxSdkVersion 23
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
@@ -65,4 +65,6 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':libcocos2dx')
     compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.mcxiaoke.volley:library:1.+'
+    compile project(':android-support-v4-preferencefragment-master')
 }

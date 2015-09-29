@@ -957,7 +957,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = innew.ios.Navinival;
 				PRODUCT_NAME = "Navinival iOS";
 				PROVISIONING_PROFILE = "";
-				SDKROOT = iphoneos8.4;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "arm64 armv7";
@@ -1006,7 +1006,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = innew.ios.Navinival;
 				PRODUCT_NAME = "Navinival iOS";
 				PROVISIONING_PROFILE = "";
-				SDKROOT = iphoneos8.4;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "arm64 armv7";

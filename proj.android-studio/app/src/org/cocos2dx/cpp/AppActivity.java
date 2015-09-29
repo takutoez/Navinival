@@ -23,9 +23,43 @@ THE SOFTWARE.
 ****************************************************************************/
 package org.cocos2dx.cpp;
 
+import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+
+import com.chukong.cocosplay.client.CocosPlayClient;
+
 import org.cocos2dx.lib.Cocos2dxActivity;
+import org.cocos2dx.lib.Cocos2dxHandler;
+import org.cocos2dx.lib.Cocos2dxHelper;
+
+import jp.cocos2dx.newgame.R;
 
 public class AppActivity extends Cocos2dxActivity {
+
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        CocosPlayClient.init(this, false);
+        onLoadNativeLibraries();
+
+        sContext = this;
+        this.mHandler = new Cocos2dxHandler(this);
+
+        Cocos2dxHelper.init(this);
+
+        this.mGLContextAttrs = getGLContextAttrs();
+
+        setContentView(R.layout.main);
+
+        if (savedInstanceState == null) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            SlidingTabsBasicFragment fragment = new SlidingTabsBasicFragment();
+            transaction.replace(R.id.fragment, fragment);
+            transaction.commit();
+        }
+    }
+
     public static void mapData(int x, int y, int floor) {
 
     }

@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">なびにばる</string>
+    <string name="base_url">http://navinival.com/app/gakuin/</string>
+    <string name="tab_map">マップ</string>
+    <string name="tab_plan">予定</string>
+    <string name="tab_information">情報</string>
+    <string name="tab_settings">設定</string>
+    <string name="gakuinsei">学院生</string>
+    <string name="gakuinsei_mode_category">ユーザー情報</string>
+    <string name="gakuinsei_mode_description">これをオンにすると自分の団体の情報を登録できます。詳しい使用方法は公式Twitterやホームページを確認してください。</string>
+    <string name="other">その他</string>
 </resources>

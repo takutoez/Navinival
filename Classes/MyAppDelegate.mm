@@ -217,6 +217,7 @@
             [self mapInformation: point number:153 upperLeftX:2076.0 upperLeftY:2554.0 lowerLeftX:2076.0 lowerLeftY:2612.0 upperRightX:2137.0 upperRightY:2554.0 lowerRightX:2137.0 lowerRightY:2612.0];//地学教員室
             [self mapInformation: point  number:160 upperLeftX:1725.0 upperLeftY:2050.0 lowerLeftX:1725.0 lowerLeftY:2436.0 upperRightX:2123.0 upperRightY:2050.0 lowerRightX:2123.0 lowerRightY:2435.0];//第二体育館
             [self mapInformation: point  number:161 upperLeftX:2123.0 upperLeftY:2195.0 lowerLeftX:2123.0 lowerLeftY:2373.0 upperRightX:2172.0 upperRightY:2195.0 lowerRightX:2172.0 lowerRightY:2373.0];//第二体育館玄関
+            [self mapInformation: point number:129 upperLeftX:2562.0 upperLeftY:2056.0 lowerLeftX:2563.0 lowerLeftY:2447.0 upperRightX:3146.0 upperRightY:2053.0 lowerRightX:3148.0 lowerRightY:2455.0];//講堂
             break;
         case 1:
             [self mapInformation: point number:19 upperLeftX:2464.0 upperLeftY:4148.0 lowerLeftX:2464.0 lowerLeftY:4278.0 upperRightX:2569.0 upperRightY:4147.0 lowerRightX:2569.0 lowerRightY:4279.0];//1-4
@@ -271,12 +272,11 @@
             [self mapInformation: point number:113 upperLeftX:3857.0 upperLeftY:3219.0 lowerLeftX:3888.0 lowerLeftY:3336.0 upperRightX:3986.0 upperRightY:3184.0 lowerRightX:4018.0 lowerRightY:3302.0];//1-F
             [self mapInformation: point number:127 upperLeftX:2455.0 upperLeftY:2056.0 lowerLeftX:2455.0 lowerLeftY:2185.0 upperRightX:2562.0 upperRightY:2056.0 lowerRightX:2562.0 lowerRightY:2186.0];//トイレ１
             [self mapInformation: point number:128 upperLeftX:2456.0 upperLeftY:2320.0 lowerLeftX:2456.0 lowerLeftY:2447.0 upperRightX:2562.0 upperRightY:2319.0 lowerRightX:2563.0 lowerRightY:2447.0];//トイレ２
-            [self mapInformation: point number:129 upperLeftX:2562.0 upperLeftY:2056.0 lowerLeftX:2563.0 lowerLeftY:2447.0 upperRightX:3146.0 upperRightY:2053.0 lowerRightX:3148.0 lowerRightY:2455.0];//講堂
             [self mapInformation: point number:130 upperLeftX:3147.0 upperLeftY:2014.0 lowerLeftX:3147.0 lowerLeftY:2211.0 upperRightX:3267.0 upperRightY:2014.0 lowerRightX:3267.0 lowerRightY:3267.0];//音楽室
             [self mapInformation: point number:131 upperLeftX:3149.0 upperLeftY:2213.0 lowerLeftX:3149.0 lowerLeftY:2278.0 upperRightX:3219.0 upperRightY:2213.0 lowerRightX:3219.0 lowerRightY:2277.0];//楽器倉庫1
             [self mapInformation: point number:132 upperLeftX:3149.0 upperLeftY:2277.0 lowerLeftX:3149.0 lowerLeftY:2339.0 upperRightX:3219.0 upperRightY:2277.0 lowerRightX:3220.0 lowerRightY:2337.0];//楽器倉庫2
             [self mapInformation: point number:133 upperLeftX:3149.0 upperLeftY:2338.0 lowerLeftX:3149.0 lowerLeftY:2487.0 upperRightX:3267.0 upperRightY:2338.0 lowerRightX:3269.0 lowerRightY:2487.0];//音楽室2
-            [self mapInformation: point number:134 upperLeftX:2456.0 upperLeftY:2056.0 lowerLeftX:2456.0 lowerLeftY:2447.0 upperRightX:3150.0 upperRightY:2055.0 lowerRightX:3150.0 lowerRightY:2446.0];//講堂
+            [self mapInformation: point number:129 upperLeftX:2456.0 upperLeftY:2056.0 lowerLeftX:2456.0 lowerLeftY:2447.0 upperRightX:3150.0 upperRightY:2055.0 lowerRightX:3150.0 lowerRightY:2446.0];//講堂
             break;
         case 2:
             [self mapInformation: point number:36 upperLeftX:2461.0 upperLeftY:3782.0 lowerLeftX:2461.0 lowerLeftY:3901.0 upperRightX:2566.0 upperRightY:3782.0 lowerRightX:2566.0 lowerRightY:3902.0];//3-1

@@ -50,6 +50,7 @@
 - (void)startBeacon:(NSMutableArray *)array;
 - (void)oneBeaconWithMajor:(int *)majors minor:(int *)minors;
 - (void)twoBeaconsWithMajor:(int *)majors minor:(int *)minors;
+- (void)twoBeaconsHaveDifferentProximityWithMajor:(int *)majors minor:(int *)minors;
 - (void)threeBeaconsWithMajor:(int *)majors minor:(int *)minors;
 - (void)fourBeaconsWithMajor:(int *)majors minor:(int *)minors;
 - (void)showMapInformation:(NSString *)number;
